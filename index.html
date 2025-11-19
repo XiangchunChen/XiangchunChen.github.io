@@ -113,6 +113,22 @@ nav {
         transform: translateY(0);
     }
 }
+
+#ai-chat-widget {
+position: fixed; bottom: 20px; right: 20px; width: 300px;
+background: white; border: 1px solid #ccc; border-radius: 10px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999; font-family: sans-serif;
+display: flex; flex-direction: column; overflow: hidden;
+}
+#chat-header { background: #007bff; color: white; padding: 10px; font-weight: bold; cursor: pointer; }
+#chat-history { height: 200px; overflow-y: auto; padding: 10px; background: #f9f9f9; font-size: 13px; }
+#chat-input-area { display: flex; border-top: 1px solid #eee; }
+#chat-input { flex: 1; border: none; padding: 10px; outline: none; }
+#chat-btn { border: none; background: #007bff; color: white; padding: 0 15px; cursor: pointer; }
+.msg-user { text-align: right; color: #333; margin: 5px 0; }
+.msg-ai { text-align: left; color: #0056b3; margin: 5px 0; }
+
+
 </style>
 </head>
 
@@ -162,6 +178,17 @@ nav {
         Previously, his research also covered digital twin, reinforcement learning, and edge computing.</p>
             
         </p>
+        <div id="ai-chat-widget">
+          <div id="chat-header" onclick="toggleChat()">🤖 Ask My AI Agent</div>
+          <div id="chat-content" style="display:none;"> <div id="chat-history">
+              <div class="msg-ai">Hello! I'm Xiangchun's AI Assistant. Ask me about his research!</div>
+            </div>
+            <div id="chat-input-area">
+              <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">
+              <button id="chat-btn" onclick="sendMessage()">Send</button>
+            </div>
+          </div>
+        </div>
         
             <h2 id="education">Education Background</h2>
             <ul>
@@ -386,7 +413,45 @@ nav {
 
 
 </div>
+<script>
+  const WORKER_URL = "https://ai-research-assistant.xiangchunchen78.workers.dev/";
 
+  function toggleChat() {
+    const content = document.getElementById('chat-content');
+    content.style.display = content.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function handleEnter(e) { if(e.key === 'Enter') sendMessage(); }
+
+  async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const history = document.getElementById('chat-history');
+    const question = input.value.trim();
+    if (!question) return;
+
+    // 显示用户提问
+    history.innerHTML += `<div class="msg-user">You: ${question}</div>`;
+    input.value = '';
+    history.scrollTop = history.scrollHeight;
+
+    try {
+        history.innerHTML += `<div class="msg-ai">Thinking...</div>`;
+        const res = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question: question })
+        });
+        const data = await res.json();
+
+        // 移除 "Thinking..." 并显示回答
+        history.lastElementChild.remove();
+        history.innerHTML += `<div class="msg-ai">AI: ${data.response}</div>`;
+    } catch (err) {
+        history.lastElementChild.innerText = "Error connecting to AI.";
+    }
+    history.scrollTop = history.scrollHeight;
+  }
+</script>
 <script>
 // Add scroll effect to navigation
 window.addEventListener('scroll', function() {
