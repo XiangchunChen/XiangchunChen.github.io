@@ -28,6 +28,154 @@
     </script>
     <!-- End MathJax -->
 <style>
+/* index.html 内 <style> 区域追加/替换 */
+#ai-chat-widget {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 360px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  border-radius: 24px;
+  background: #fff;
+  overflow: visible;
+  z-index: 1000;
+  font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
+  transition: all 0.3s;
+}
+
+#chat-header {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #4a4a4a;
+  padding: 18px 20px;
+  border-radius: 24px 24px 0 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.mascot-3d {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  width: 70px;
+  height: 70px;
+  z-index: 1001;
+  animation: floatMascot 3s ease-in-out infinite;
+}
+
+
+.mascot-3d img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+}
+.header-title {
+  margin-left: 70px;
+}
+
+#chat-content {
+  display: flex;
+  flex-direction: column;
+  height: 420px;
+  background: #fff;
+  border-radius: 0 0 24px 24px;
+}
+
+#chat-history {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.msg {
+  max-width: 80%;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  position: relative;
+}
+.msg-ai {
+  align-self: flex-start;
+  background: #fff;
+  color: #333;
+  border-radius: 4px 20px 20px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid #f0f0f0;
+}
+.msg-user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+  color: #1a472a;
+  border-radius: 20px 4px 20px 20px;
+  box-shadow: 0 2px 8px rgba(98,204,107,0.2);
+}
+
+#chat-input-area {
+  display: flex;
+  padding: 15px;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+  border-radius: 0 0 24px 24px;
+}
+#chat-input {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid #eee;
+  border-radius: 30px;
+  outline: none;
+  margin-right: 12px;
+  font-size: 0.95rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+#chat-input:focus {
+  border-color: #a8edea;
+  background-color: #fff;
+}
+#chat-btn {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #555;
+  border: none;
+  padding: 0 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(168,237,234,0.3);
+}
+#chat-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(168,237,234,0.4);
+}
+#chat-btn:active {
+  transform: translateY(0);
+}
+
+@keyframes floatMascot {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+.sponsor-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+.sponsor-logos img {
+    display: block;
+    height: 100px;
+}
 /* Additional CSS for enhanced styling */
 #layout-content > * {
     animation: fadeInUp 0.6s ease forwards;
@@ -167,21 +315,57 @@ display: flex; flex-direction: column; overflow: hidden;
         </p>
         </div>
         </div>
-
             <h2>Short Bio</h2>
             <p align="justify"> Xiangchun Chen is a PhD candidate in Department of Computing, <a href = "https://www.polyu.edu.hk/"> <b> The Hong Kong Polytechnic University </b></a>,
                 supervised by <a href = "http://www4.comp.polyu.edu.hk/~csjcao/"><b>Prof. Cao Jiannong</b></a>.
                 Previously, he received the Bachelor Degree of Computer Science and Technology from
                 <a href = "http://www.cs.hit.edu.cn/?q=node/201"><b>Faculty of Computing</b></a>, Harbin Institute of Technology in 2021.
 
-        <p align="justify"> His research interests lie in <b>AI Agents</b> and <b>Large Language Models (LLMs)</b>. His current work focuses on building autonomous AI agents for complex scheduling and resource management.
-        Previously, his research also covered digital twin, reinforcement learning, and edge computing.</p>
+        <p align="justify"> His research interests lie in edge computing, reinforcement learning, digital twin, AI Agents and Large Language Models (LLMs). His current work focuses on building autonomous AI agents for complex scheduling and resource management.</p>
             
         </p>
+<!--        <div id="ai-chat-widget">-->
+<!--          <div id="chat-header" onclick="toggleChat()">🤖 Ask My AI Agent</div>-->
+<!--          <div id="chat-content" style="display:none;"> <div id="chat-history">-->
+<!--              <div class="msg-ai">Hello! I'm Xiangchun's AI Assistant. Ask me about his research!</div>-->
+<!--            </div>-->
+<!--            <div id="chat-input-area">-->
+<!--              <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">-->
+<!--              <button id="chat-btn" onclick="sendMessage()">Send</button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div id="ai-chat-widget">-->
+<!--          <div id="chat-header" onclick="toggleChat()">-->
+<!--            <div class="ai-avatar">-->
+<!--              &lt;!&ndash; 推荐用GIF/SVG动画，或Lottie动画容器 &ndash;&gt;-->
+<!--              <img src="./imgs/usagi.gif" alt="AI Avatar" />-->
+<!--            </div>-->
+<!--            <span class="ai-title">Ask My AI Agent</span>-->
+<!--          </div>-->
+<!--          <div id="chat-content" style="display:none;">-->
+<!--            <div id="chat-history">-->
+<!--              <div class="msg-ai">Hello! I'm Xiangchun's AI Assistant. Ask me about his research!</div>-->
+<!--            </div>-->
+<!--            <div id="chat-input-area">-->
+<!--              <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">-->
+<!--              <button id="chat-btn" onclick="sendMessage()">-->
+<!--                <svg width="20" height="20" fill="none"><path d="M2 10l16-6-6 16-2-7-7-3z" fill="#fff"/></svg>-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+        <!-- 聊天组件极致可爱3D风格实现 -->
         <div id="ai-chat-widget">
-          <div id="chat-header" onclick="toggleChat()">🤖 Ask My AI Agent</div>
-          <div id="chat-content" style="display:none;"> <div id="chat-history">
-              <div class="msg-ai">Hello! I'm Xiangchun's AI Assistant. Ask me about his research!</div>
+          <div id="chat-header" onclick="toggleChat()">
+            <div class="mascot-3d">
+              <img src="./imgs/usagi.gif" alt="3D Usagi" />
+            </div>
+            <span class="header-title">Ask My AI Agent</span>
+          </div>
+          <div id="chat-content" style="display:none;">
+            <div id="chat-history">
+              <div class="msg msg-ai">Hello! I'm Xiangchun's AI Assistant. 🐰<br>Ask me about his research!</div>
             </div>
             <div id="chat-input-area">
               <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">
@@ -189,10 +373,8 @@ display: flex; flex-direction: column; overflow: hidden;
             </div>
           </div>
         </div>
-        
             <h2 id="education">Education Background</h2>
             <ul>
-<!-- MathJax -->
                 <P>
                 <li>
                     <font style="color:#527bbd;"><b>Ph.D.:</b></font>&nbsp Hong Kong Polytechnic University,&nbsp Hong Kong, China. Aug. 2021 - Now <br>
@@ -211,27 +393,16 @@ display: flex; flex-direction: column; overflow: hidden;
                 </p>
             </ul>
 
-            <h2 id="publications">Papers</h2>
-
-            <h3>Publications</h3>
+            <h2 id="publications">Publications</h2>
+            <h3 id="journal-articles">Selected Journal Publications</h3>
 
             <ul>
                 <li>
-                    <p><font style="color:#527bbd;"><b>[arXiv]</font></b>&nbsp <a href="#" target=&ldquo;blank&rdquo;>
-                        MetaScheduler: AI Agents for Automatic Scheduling in Edge Computing</a>, <br />
-                        in arXiv preprint, 2025.<br />
-                    </p>
-                </li>
-            </ul>
-
-            <h3>Previous Research (Edge Computing)</h3>
-            <ul>
-                <li>
-                    <p><font style="color:#527bbd;"><b>[TMC]</font></b>&nbsp <a href="" target=&ldquo;blank&rdquo;>
+                    <p><font style="color:#527bbd;"><b>[TMC]</font></b>&nbsp <a href="https://ieeexplore.ieee.org/document/11224639" target=&ldquo;blank&rdquo;>
                         Decentralized Task Offloading in Collaborative Edge Computing: A Digital Twin assisted Multi-agent Reinforcement Learning Approach</a>, <br />
                         <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Rui Cao, Yuvraj Sahni, Mingjin Zhang, and Yusheng Ji. <br />
                         in IEEE Transactions on Mobile Computing, 2025.<br />
-                        (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail" target=&ldquo;blank&rdquo;><b>CCF A</b></a>).<br /> </p>
+                        (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail" target=&ldquo;blank&rdquo;><b>CCF A, SCI I, JCR Q1</b></a>).<br /> </p>
                 </li>
             </ul>
             <ul>
@@ -240,7 +411,7 @@ display: flex; flex-direction: column; overflow: hidden;
                         Mobility-aware Dependent Task Offloading in Edge Computing: A Digital Twin-assisted Reinforcement Learning Approach</a>, <br />
                         <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Mingjin Zhang, Zhixuan Liang, and Lei Yang. <br />
                         in IEEE Transactions on Mobile Computing, 2024.<br />
-                        (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail" target=&ldquo;blank&rdquo;><b>CCF A</b></a>).<br /> </p>
+                        (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail" target=&ldquo;blank&rdquo;><b>CCF A, SCI I,JCR Q1</b></a>).<br /> </p>
                 </li>
             </ul>
             <ul>
@@ -250,20 +421,10 @@ display: flex; flex-direction: column; overflow: hidden;
                         Dynamic Task Offloading in Edge Computing based on Dependency-aware Reinforcement Learning</a>, <br />
                         <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Shan Jiang, and Zhixuan Liang. <br />
                         in IEEE Transactions on Cloud Computing, 2024.<br />
-                        (<a href="https://www.letpub.com.cn/index.php?journalid=10347&page=journalapp&view=detail" target=&ldquo;blank&rdquo;><b>IEEE Best Paper Award 2024, JCR Q1</b></a>).<br /> </p>
+                        (<a href="https://www.letpub.com.cn/index.php?journalid=10347&page=journalapp&view=detail" target=&ldquo;blank&rdquo;><b>IEEE TCC Best Paper Award 2024, SCI II, JCR Q1</b></a>).<br /> </p>
                 </li>
             </ul>
-            <ul>
-                <li>
-                    <p>
-                        <font style="color:#527bbd;"><b>[ICNC]</b></font>&nbsp; <a href="http://www.conf-icnc.org/2024/papers/p794-zhang.pdf" target=&ldquo;blank&rdquo;>
-                        Resource-efficient Parallel Split Learning in Heterogeneous Edge Computing</a>, <br />
-                        Mingjin Zhang, Jiannong Cao, Yuvraj Sahni, <u><b>Xiangchun Chen</b></u>, Shan Jiang, <br />
-                        in the International Conference on Computing, Networking and Communication (ICNC 2024), 2024. <br />
-<!--                        (<a href="http://www.conf-icnc.org/2024/papers/p794-zhang.pdf" target=&ldquo;blank&rdquo;><b></b></a>).<br /> </p>-->
-                    </p>
-                </li>
-            </ul>
+            <h3 id="conference-articles">Selected Conference Publications</h3>
             <ul>
                 <li>
                     <p><font style="color:#527bbd;"><b>[MASS]</font></b>&nbsp <a href="https://doi.org/10.1109/MASS58611.2023.00012" target=&ldquo;blank&rdquo;>
@@ -273,7 +434,6 @@ display: flex; flex-direction: column; overflow: hidden;
                         (<a href="https://www.ccf.org.cn/Academic_Evaluation/NIS/" target=&ldquo;blank&rdquo;><b>CCF-C</b></a>).<br /> </p>
                 </li>
             </ul>
-
 
 
             <h2 id="teaching">Teaching Experience</h2>
@@ -318,26 +478,23 @@ display: flex; flex-direction: column; overflow: hidden;
 
 <h3>PC Member/Journal Reviewer</h3>
     <ul>
-        <li>Reviewer for IEEE Transactions on Cognitive Communications and Networking </li>
-    </ul>
-    <ul>
         <li>Reviewer for IEEE Transactions on Mobile Computing (<b>IEEE TMC</b>)</li>
     </ul>
     <ul>
+        <li>Reviewer for IEEE Transactions on Cognitive Communications and Networking (<b>IEEE TCCN</b>) </li>
+    </ul>
+    <ul>
+        <li>Reviewer for IEEE Transactions on IEEE/ACM Transactions on Networking(<b>IEEE TON</b>) </li>
+    </ul>
+    <ul>
         <li>Reviewer for IEEE Internet of Things Journal (<b>IEEE IOT-J</b>)</li>
-    </ul>
-    <ul>
-        <li>Reviewer for ACM Transactions on Intelligent Systems and Technology (<b>ACM TIST</b>)</li>
-    </ul>
-    <ul>
-        <li>Reviewer for IEEE Computer Software and Applications Conference (<b>COMPSAC</b>)</li>
     </ul>
 <!--<h3>Membership</h3>-->
 
 <h2 id="honors">Selected Honors</h2>
 
 <ul>
-        <li>TCC 2024 Best Paper Award.<br>
+        <li>IEEE TCC 2024 Best Paper Award.<br>
         Awarded by the lEEE ComputerSociety Publications Board, 2025.
         </li>
 
@@ -351,16 +508,23 @@ display: flex; flex-direction: column; overflow: hidden;
         
 </ul>
 
- <h2>Sponsors/Collaborators</h2>
-    I sincerely thank these sponsors/collaborators for providing great support for my research.
-    <br>
-    <br>
-    <br>
-    <img src="./imgs/polyu.jpg" height="100">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-    <br>
-    <br>
+
+<h2>Sponsors/Collaborators</h2>
+I sincerely thank these sponsors/collaborators for providing great support for my research.
+<div class="sponsor-logos">
+    <img src="./imgs/polyu.jpg" height="100" alt="PolyU">
+    <img src="./imgs/IMCL.png" height="100" alt="IMCL">
+    <img src="./imgs/KLab.jpg" height="100" alt="NII">
+</div>
 
 <h2>News</h2>
+     <ul>
+        <P>
+        <li>
+             [10/2025]  Congratulations! Our paper, "Reliability-aware Task Offloading in Decentralized Edge Computing: A Digital Twin assisted Multi-agent Reinforcement Learning Approach.", has been accepted at IEEE Transactions on Mobile Computing！
+        </li>
+        </P>
+    </ul>
     <ul>
         <P>
         <li>
@@ -375,43 +539,6 @@ display: flex; flex-direction: column; overflow: hidden;
         </li>
         </P>
     </ul>
-    <ul>
-        <P>
-        <li>
-             [03/2024]  Congratulations! Our paper "Dynamic Task Offloading in Edge Computing based on Dependency-aware Reinforcement Learning" has been accepted at IEEE Transactions on Cloud Computing！
-        </li>
-        </P>
-    </ul>
-    <ul>
-        <P>
-        <li>
-         [06/2023]  Pass PhD confirmation as a PhD candidate.
-        </li>
-        </P>
-    </ul>
-    <ul>
-        <P>
-        <li>
-         [06/2023]  Congratulations! Our paper "Digital Twin-assisted Reinforcement Learning for Dynamic Microservice Offloading in Edge Computing" has been accepted at the 2023 IEEE 20th International Conference on Mobile Ad Hoc and Smart Systems (MASS)！
-        </li>
-        </P>
-    </ul>
-    <ul>
-    <P>
-    <li>
-     [08/2021]  Join IMCL Lab as a PhD student.
-    </li>
-    </P>
-    </ul>
-    <ul>
-        <P>
-        <li>
-     [06/2021]  Get B.S. Degree from Harbin Institute of Technology.
-        </li>
-        </P>
-    </ul>
-
-
 </div>
 <script>
   const WORKER_URL = "https://ai-research-assistant.xiangchunchen78.workers.dev/";
