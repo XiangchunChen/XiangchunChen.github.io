@@ -128,10 +128,10 @@
         <!-- Pipeline Toggles: 增大点击区域 -->
         <div class="flex gap-4 text-sm font-medium">
             <div class="flex items-center pipeline-toggle static-pipeline px-4 py-2 rounded-lg transition-all" onclick="switchPipeline('static')" style="cursor: pointer; background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1);">
-                <span class="w-2.5 h-2.5 rounded-full bg-slate-500 mr-2.5"></span>Static Pipeline
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-500 mr-2.5"></span>Traditional Scheduler (Static)
             </div>
             <div class="flex items-center pipeline-toggle dynamic-pipeline active px-4 py-2 rounded-lg transition-all" onclick="switchPipeline('dynamic')" style="cursor: pointer; background: rgba(59,130,246,0.2); color: #60a5fa; border: 1px solid rgba(59,130,246,0.4);">
-                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mr-2.5 shadow-[0_0_10px_#3b82f6] animate-pulse"></span>Dynamic Runtime
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mr-2.5 shadow-[0_0_10px_#3b82f6] animate-pulse"></span>MetaScheduler (Dynamic)
             </div>
         </div>
     </header>
@@ -238,8 +238,8 @@ def lane_keeping_task(camera):
                 <div class="absolute top-6 left-8 flex items-center gap-3">
                     <div class="h-8 w-1 bg-blue-500 rounded-full"></div>
                     <div>
-                        <div class="text-xs font-bold text-slate-400 tracking-wider uppercase">Pipeline Architecture</div>
-                        <div class="text-xs font-bold text-slate-400">Runtime Graph</div>
+                        <div class="text-xs font-bold text-slate-700 tracking-wider uppercase">Pipeline Architecture</div>
+<!--                        <div class="text-xs font-bold text-slate-400">Runtime Graph</div>-->
                     </div>
                     <span id="rewrite-badge" class="hidden ml-4 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full border border-amber-300 animate-pulse shadow-sm">
                         <i class="fas fa-bolt mr-1"></i>OPTIMIZED
