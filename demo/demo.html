@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetaScheduler: 自动驾驶感知系统演示</title>
+    <title>PolyScheduler: Self-Evolving Scheduling Agent for Edge Computing</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- 更换为更现代的代码高亮主题 (VS Code Dark) -->
@@ -111,11 +111,11 @@
     <header class="h-16 bg-slate-900 border-b border-slate-700 flex items-center justify-between px-6 z-20 shadow-lg flex-shrink-0">
         <div class="flex items-center gap-4">
             <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
-                <i class="fas fa-car-on text-xl"></i>
+                <i class="fas fa-gears text-xl"></i>
             </div>
             <div>
-                <h1 class="font-bold text-xl tracking-tight text-white leading-tight">MetaScheduler</h1>
-                <div class="text-xs text-slate-400 font-medium tracking-wide">Self Evolving Coding Agent for Edge Scheduling</div>
+                <h1 class="font-bold text-xl tracking-tight text-white leading-tight">PolyScheduler</h1>
+                <div class="text-xs text-slate-400 font-medium tracking-wide">Self-Evolving Scheduling Agent for Edge Computing</div>
             </div>
 
             <!-- Agent Config -->
@@ -131,7 +131,7 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-slate-500 mr-2.5"></span>Traditional Scheduler (Static)
             </div>
             <div class="flex items-center pipeline-toggle dynamic-pipeline active px-4 py-2 rounded-lg transition-all" onclick="switchPipeline('dynamic')" style="cursor: pointer; background: rgba(59,130,246,0.2); color: #60a5fa; border: 1px solid rgba(59,130,246,0.4);">
-                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mr-2.5 shadow-[0_0_10px_#3b82f6] animate-pulse"></span>MetaScheduler (Dynamic)
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mr-2.5 shadow-[0_0_10px_#3b82f6] animate-pulse"></span>PolyScheduler (Dynamic)
             </div>
         </div>
     </header>
@@ -144,12 +144,12 @@
         <aside class="w-[450px] bg-[#1e1e1e] border-r border-slate-700 flex flex-col z-10 shadow-2xl relative transition-colors duration-500" id="code-panel">
             <div class="flex border-b border-[#333] bg-[#252526]">
                 <button class="px-6 py-3 text-sm font-medium text-white border-b-2 border-blue-500 bg-[#1e1e1e]">
-                    <i class="fab fa-python mr-2 text-yellow-400"></i>lane_detection.py
+                    <i class="fab fa-python mr-2 text-yellow-400"></i>adaptive_scheduler.py
                 </button>
                 <div class="flex-1 flex justify-end items-center px-4">
                      <div class="px-2 py-1 bg-green-900/30 border border-green-700/50 rounded flex items-center gap-2">
                         <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                        <span class="text-[10px] font-bold text-green-400 tracking-wider">LIVE EXECUTION</span>
+                        <span class="text-[10px] font-bold text-green-400 tracking-wider" id="execution-indicator">LIVE EXECUTION</span>
                     </div>
                 </div>
             </div>
@@ -157,25 +157,19 @@
             <div class="flex-1 p-0 overflow-hidden relative group bg-[#1e1e1e]">
                 <!-- 代码字体大小增加至 text-[13px] 或 text-sm -->
                 <pre class="h-full w-full m-0 p-5 overflow-auto code-font text-[13px] leading-7 text-gray-300"><code class="language-python" id="code-display" style="background: transparent; padding: 0;">
-def lane_keeping_task(camera):
-    # Standard ADAS Pipeline
-    # 1. Inverse Perspective Mapping (Heavy)
-    ipm_matrix = load_calibration()
-
+def QualityAware_Scheduler(data_stream, resource_monitor):
+    # Standard High-Bandwidth Scheduling Policy
+    # 1. Resource Monitoring and Task Allocation
     while True:
-        raw_frame = camera.read()
+        # Monitor current network resources
+        bandwidth = resource_monitor.get_bandwidth()
+        latency = resource_monitor.get_latency()
 
-        # Core Algorithm: IPM -> Threshold -> Fit
-        bird_view = cv2.warpPerspective(raw_frame, ipm_matrix)
-        binary = color_threshold(bird_view, 'HLS')
-        lanes = polyfit_lanes(binary) # O(N^2)
+        # Process full data stream when resources available
+        processed_data = full_visual_processing(data_stream.read())
 
-        # Path Planning
-        path = calculate_center_path(lanes)
-
-        # Visualization for Remote Monitor
-        output_frame = draw_lanes(bird_view, lanes, path)
-        Cloud.stream_video(output_frame) # High Bandwidth
+        # Upload complete results when bandwidth is high
+        upload_result = Cloud.upload_video(processed_data.video_output)
                 </code></pre>
 
                 <!-- AI Overlay -->
@@ -206,14 +200,14 @@ def lane_keeping_task(camera):
             <div class="h-[55%] border-b border-slate-200 p-6 flex gap-6 bg-white shadow-sm">
                 <!-- Input Video -->
                 <div class="flex-1 video-wrapper group">
-                    <div class="video-label"><i class="fas fa-video mr-2 text-blue-400"></i>Input Feed</div>
+                    <div class="video-label"><i class="fas fa-database mr-2 text-blue-400"></i>RAW FEED</div>
                     <canvas id="canvas-input" class="w-full h-full object-cover opacity-90"></canvas>
                     <video id="video-input" src="input.mov" loop muted autoplay class="absolute inset-0 w-full h-full object-cover hidden" onerror="this.style.display='none'"></video>
                 </div>
 
                 <!-- Output Video -->
                 <div class="flex-1 video-wrapper border-blue-500/30">
-                    <div class="video-label border-blue-500/30 text-blue-100"><i class="fas fa-eye mr-2 text-green-400"></i>Processed Output</div>
+                    <div class="video-label border-blue-500/30 text-blue-100"><i class="fas fa-cogs mr-2 text-green-400"></i>VISUAL STREAM</div>
 
                     <!-- Dynamic Content Overlay -->
                     <div id="output-overlay-text" class="absolute inset-0 flex items-center justify-center hidden z-20 bg-slate-900/90 backdrop-blur-sm">
@@ -238,7 +232,7 @@ def lane_keeping_task(camera):
                 <div class="absolute top-6 left-8 flex items-center gap-3">
                     <div class="h-8 w-1 bg-blue-500 rounded-full"></div>
                     <div>
-                        <div class="text-xs font-bold text-slate-700 tracking-wider uppercase">Pipeline Architecture</div>
+                        <div class="text-xs font-bold text-slate-700 tracking-wider uppercase">SCHEDULER ARCHITECTURE</div>
 <!--                        <div class="text-xs font-bold text-slate-400">Runtime Graph</div>-->
                     </div>
                     <span id="rewrite-badge" class="hidden ml-4 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full border border-amber-300 animate-pulse shadow-sm">
@@ -248,35 +242,35 @@ def lane_keeping_task(camera):
 
                 <div class="flex items-center justify-center px-10 gap-8 h-full">
 
-                    <!-- Node 1: Input -->
+                    <!-- Node 1: Resource Monitor -->
                     <div class="node-card w-40 p-6 rounded-2xl text-center border border-slate-100">
                         <div class="w-12 h-12 mx-auto bg-slate-100 rounded-full flex items-center justify-center mb-3 text-slate-500">
-                             <i class="fas fa-camera text-2xl"></i>
+                             <i class="fas fa-network-wired text-2xl"></i>
                         </div>
-                        <div class="text-sm text-slate-700 font-bold">Camera Stream</div>
-                        <div class="text-xs text-slate-400 mt-1">1080p @ 30fps</div>
+                        <div class="text-sm text-slate-700 font-bold">Resource Monitor</div>
+                        <div class="text-xs text-slate-400 mt-1">Bandwidth & Latency</div>
                     </div>
 
                     <!-- Line 1 -->
                     <div class="connector flow" id="conn-1"></div>
 
-                    <!-- Node 2: Algorithm -->
+                    <!-- Node 2: Scheduler -->
                     <div id="node-algo" class="node-card w-64 p-6 border-2 border-blue-500 rounded-2xl text-center shadow-xl shadow-blue-500/10 z-10">
-                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full uppercase font-bold tracking-wide shadow-md" id="tag-algo">Standard Precision</div>
-                        <i class="fas fa-road text-slate-800 text-4xl mb-3 mt-1" id="icon-algo"></i>
-                        <div class="text-base font-bold text-slate-800" id="text-algo">IPM + PolyFit</div>
-                        <div class="text-xs text-blue-600 font-medium mt-1 bg-blue-50 py-1 px-2 rounded-md inline-block" id="desc-algo">Inverse Perspective Mapping</div>
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full uppercase font-bold tracking-wide shadow-md" id="tag-algo">ADAPTIVE SCHEDULER</div>
+                        <i class="fas fa-project-diagram text-slate-800 text-4xl mb-3 mt-1" id="icon-algo"></i>
+                        <div class="text-base font-bold text-slate-800" id="text-algo">Adaptive Scheduler</div>
+                        <div class="text-xs text-blue-600 font-medium mt-1 bg-blue-50 py-1 px-2 rounded-md inline-block" id="desc-algo">Dynamic Resource Allocation</div>
                     </div>
 
                     <!-- Line 2 -->
                     <div class="connector flow" id="conn-2"></div>
 
-                    <!-- Node 3: Cloud Uplink -->
+                    <!-- Node 3: Task Executor -->
                     <div id="node-uplink" class="node-card w-48 p-6 border-2 border-blue-500 rounded-2xl text-center shadow-xl shadow-blue-500/10 z-10">
-                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full uppercase font-bold tracking-wide shadow-md" id="tag-uplink">Debug Stream</div>
-                        <i class="fas fa-file-video text-slate-800 text-3xl mb-3 mt-1" id="icon-uplink"></i>
-                        <div class="text-sm font-bold text-slate-800" id="text-uplink">Video Upload</div>
-                        <div class="text-xs text-blue-600 font-medium mt-1 bg-blue-50 py-1 px-2 rounded-md inline-block" id="desc-uplink">Bird's Eye (MP4)</div>
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full uppercase font-bold tracking-wide shadow-md" id="tag-uplink">EXECUTION UNIT</div>
+                        <i class="fas fa-tasks text-slate-800 text-3xl mb-3 mt-1" id="icon-uplink"></i>
+                        <div class="text-sm font-bold text-slate-800" id="text-uplink">Task Executor</div>
+                        <div class="text-xs text-blue-600 font-medium mt-1 bg-blue-50 py-1 px-2 rounded-md inline-block" id="desc-uplink">High/Low Bandwidth Mode</div>
                     </div>
                 </div>
             </div>
@@ -324,8 +318,8 @@ def lane_keeping_task(camera):
                 </div>
                 <div class="relative">
                     <select id="select-cpu" class="w-full appearance-none bg-white text-slate-700 px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-medium shadow-sm cursor-pointer">
-                        <option value="100">NVIDIA Orin NX (High Performance)</option>
-                        <option value="20">Raspberry Pi 4 (Low Power)</option>
+                        <option value="100">NVIDIA Orin NX </option>
+                        <option value="20">Raspberry Pi 4 </option>
                     </select>
                     <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-slate-500">
                         <i class="fas fa-chevron-down text-xs"></i>
@@ -338,64 +332,58 @@ def lane_keeping_task(camera):
     <script>
         // --- Code Templates (不变) ---
         const CODE_ORIGINAL = `
-def lane_keeping_task(camera):
-    # Standard ADAS Pipeline
-    # 1. Inverse Perspective Mapping (Heavy)
-    ipm_matrix = load_calibration()
-
+def adaptive_scheduler(data_stream, resource_monitor):
+    # Standard High-Bandwidth Scheduling Policy
+    # 1. Resource Monitoring and Task Allocation
     while True:
-        raw_frame = camera.read()
+        # Monitor current network resources
+        bandwidth = resource_monitor.get_bandwidth()
+        latency = resource_monitor.get_latency()
 
-        # Core Algorithm: IPM -> Threshold -> Fit
-        bird_view = cv2.warpPerspective(raw_frame, ipm_matrix)
-        binary = color_threshold(bird_view, 'HLS')
-        lanes = polyfit_lanes(binary) # O(N^2)
+        # Process full data stream when resources available
+        processed_data = full_visual_processing(data_stream.read())
 
-        # Path Planning
-        path = calculate_center_path(lanes)
-
-        # Visualization for Remote Monitor
-        output_frame = draw_lanes(bird_view, lanes, path)
-        Cloud.stream_video(output_frame) # High Bandwidth
+        # Upload complete results when bandwidth is high
+        upload_result = Cloud.upload_video(processed_data.video_output)
 `;
 
         const CODE_NET_OPT = `
-def lane_keeping_task(camera):
+def LatencyAware_Scheduler(data_stream, resource_monitor):
     # REWRITTEN: LOW BANDWIDTH MODE
-    # Logic: Only send control telemetry
+    # Logic: Switch to lightweight telemetry-only processing
 
     while True:
-        ... # Standard IPM & Fitting
-        path = calculate_center_path(lanes)
+        # Monitor current network resources
+        bandwidth = resource_monitor.get_bandwidth()
+        latency = resource_monitor.get_latency()
 
-        steering_error = path.center - vehicle.center
+        # Process only essential data when bandwidth is low
+        essential_data = lightweight_processing(data_stream.read())
 
-        # CHANGED: No Video Upload
+        # CHANGED: Send only critical telemetry, not full video
         telemetry = {
-            "steering": steering_error,
-            "confidence": lanes.conf,
-            "timestamp": now()
+            "steering": essential_data.steering_value,
+            "confidence": essential_data.confidence,
+            "timestamp": essential_data.timestamp
         }
-        Cloud.send_telemetry(telemetry) # < 1KB/s
+        upload_result = Cloud.send_telemetry(telemetry) # < 1KB/s
 `;
 
         const CODE_CPU_OPT = `
-def lane_keeping_task(camera):
-    # REWRITTEN: LOW POWER MODE
-    # Logic: Skip IPM, use simple 2D edge detection
+def adaptive_scheduler(data_stream, resource_monitor):
+    # REWRITTEN: LOW COMPUTE MODE
+    # Logic: Simplified processing for low-power devices
 
     while True:
-        raw_frame = camera.read()
+        # Monitor current compute resources
+        available_cpu = resource_monitor.get_cpu_usage()
+        available_memory = resource_monitor.get_memory()
 
-        # CHANGED: Skip WarpPerspective (Save CPU)
-        # Use simple Hough Transform on ROI
-        edges = cv2.Canny(raw_frame[roi], 50, 150)
-        lines = cv2.HoughLinesP(edges)
+        # Use simplified processing when compute is limited
+        simple_result = simplified_processing(data_stream.read())
 
-        # Rough estimation
-        steering = simple_guidance(lines)
-
-        Cloud.stream_video(draw_lines(raw_frame, lines))
+        # Reduced processing for low-power devices
+        upload_result = Cloud.upload_simplified(simple_result)
 `;
 
         // --- Elements ---
@@ -422,19 +410,23 @@ def lane_keeping_task(camera):
             // Labels
             updateLabels(net, cpu);
 
+            // Update execution indicator based on bandwidth
+            updateExecutionIndicator(net);
+
             if (currentPipeline === 'static') {
                 codeDisplay.textContent = CODE_ORIGINAL;
                 hljs.highlightElement(codeDisplay);
                 aiOverlay.classList.add('hidden');
 
                 if (net < 30) {
-                    document.querySelector('.video-label').innerHTML = '<i class="fas fa-video mr-1"></i>Input: <span class="text-red-400">Network Issue</span>';
+                    // document.querySelector('.video-label').innerHTML = '<i class="fas fa-database mr-1"></i>RAW FEED: <span class="text-red-400">Network Issue</span>';
+                    document.querySelector('.video-label').innerHTML = '<i class="fas fa-database mr-1"></i>RAW FEED';
                 } else {
-                    document.querySelector('.video-label').innerHTML = '<i class="fas fa-video mr-1"></i>Input: Front View';
+                    document.querySelector('.video-label').innerHTML = '<i class="fas fa-database mr-1"></i>RAW FEED';
                 }
 
                 if (cpu < 40 || net < 30) {
-                    document.querySelector('.video-label.text-blue-100').innerHTML = '<i class="fas fa-eye mr-1"></i>Output: <span class="text-red-400">System Error</span>';
+                    document.querySelector('.video-label.text-blue-100').innerHTML = '<i class="fas fa-cogs mr-1"></i>VISUAL STREAM: <span class="text-red-400">Error</span>';
                     const videoOutput = document.getElementById('video-output');
                     const canvasOutput = document.getElementById('canvas-output');
                     if (videoOutput) videoOutput.classList.add('hidden');
@@ -442,10 +434,10 @@ def lane_keeping_task(camera):
 
                     if (outputOverlay) {
                         outputOverlay.classList.remove('hidden');
-                        outputOverlay.innerHTML = '<div class="absolute inset-0 flex items-center justify-center z-20 bg-slate-900/80"><div class="text-center"><i class="fas fa-exclamation-triangle text-red-400 text-3xl mb-2"></i><div class="text-red-400 font-mono text-sm">SYSTEM ERROR</div><div class="text-slate-500 text-xs mt-1">Static pipeline failed</div></div></div>';
+                        outputOverlay.innerHTML = '<div class="absolute inset-0 flex items-center justify-center z-20 bg-slate-900/80"><div class="text-center"><i class="fas fa-exclamation-triangle text-red-400 text-3xl mb-2"></i><div class="text-red-400 font-mono text-sm">SCHEDULER ERROR</div><div class="text-slate-500 text-xs mt-1">Static scheduler failed</div></div></div>';
                     }
                 } else {
-                    document.querySelector('.video-label.text-blue-100').innerHTML = '<i class="fas fa-eye mr-1"></i>Output: Bird\'s Eye (IPM)';
+                    document.querySelector('.video-label.text-blue-100').innerHTML = '<i class="fas fa-cogs mr-1"></i>VISUAL STREAM';
                     const videoOutput = document.getElementById('video-output');
                     const canvasOutput = document.getElementById('canvas-output');
                     if (videoOutput && !videoOutput.src) {
@@ -485,6 +477,15 @@ def lane_keeping_task(camera):
                 valCpu.className = "text-xs font-bold font-mono text-amber-600 bg-amber-100 px-3 py-1 rounded-full border border-amber-200";
             }
             selectCpu.value = cpu.toString();
+        }
+
+        function updateExecutionIndicator(net) {
+            const indicator = document.getElementById('execution-indicator');
+            if (net < 30) {
+                indicator.textContent = 'LATENCY AWARE';
+            } else {
+                indicator.textContent = 'QUALITY AWARE';
+            }
         }
 
         function performRewrite(state) {
@@ -538,14 +539,14 @@ def lane_keeping_task(camera):
         function updateVisuals(state) {
             if (currentPipeline === 'static') {
                 morphNode(nodeUplink, {
-                    text: "Video Upload", desc: "Bird's Eye (MP4)", icon: "fa-file-video", color: "blue", tag: "Debug Stream"
+                    text: "Full Upload", desc: "High Bandwidth Mode", icon: "fa-file-video", color: "blue", tag: "EXECUTION UNIT"
                 });
                 conn2.classList.remove('telemetry-flow'); conn2.classList.add('flow');
                 rewriteBadge.classList.add('hidden');
                 outputOverlay.classList.add('hidden');
 
                 morphNode(nodeAlgo, {
-                    text: "IPM + PolyFit", desc: "Inverse Perspective Mapping", icon: "fa-road", color: "blue", tag: "Standard Precision"
+                    text: "Adaptive Scheduler", desc: "Dynamic Resource Allocation", icon: "fa-project-diagram", color: "blue", tag: "ADAPTIVE SCHEDULER"
                 });
 
                 const net = parseInt(inputNet.value);
@@ -559,18 +560,18 @@ def lane_keeping_task(camera):
             } else {
                 if (state === 'net_opt') {
                     morphNode(nodeUplink, {
-                        text: "Telemetry Only", desc: "JSON Data Packet", icon: "fa-terminal", color: "green", tag: "Low Latency"
+                        text: "Telemetry Only", desc: "Lightweight Mode", icon: "fa-terminal", color: "green", tag: "EXECUTION UNIT"
                     });
                     conn2.classList.remove('flow'); conn2.classList.add('telemetry-flow');
                     rewriteBadge.classList.remove('hidden');
                     outputOverlay.classList.remove('hidden');
 
-                    // Update overlay content specifically for net opt
-                    outputOverlay.innerHTML = '<div class="text-center p-6 border border-green-500/30 rounded-xl bg-green-900/80 backdrop-blur"><i class="fas fa-terminal text-green-400 text-4xl mb-3"></i><div class="text-green-400 font-mono text-lg font-bold">Telemetry Mode Active</div><div class="text-slate-300 text-sm mt-2">Video stream suspended to save bandwidth</div><div class="mt-4 flex gap-4 justify-center"><div class="px-3 py-1 bg-black/50 rounded text-xs text-green-300 font-mono">Steer: -2.4°</div><div class="px-3 py-1 bg-black/50 rounded text-xs text-green-300 font-mono">Conf: 98%</div></div></div>';
+                    // Update overlay content specifically for net opt - Telemetry Packet Format
+                    outputOverlay.innerHTML = '<div class="p-6 border border-green-500/30 rounded-xl bg-slate-900/90 backdrop-blur text-left max-w-xs"><div class="text-green-400 font-mono text-sm mb-2">TELEMETRY PACKET</div><div class="text-slate-300 font-mono text-xs space-y-1"><div>Packet ID: #8932</div><div>Steering: -2.45 rad</div><div>Velocity: 45 km/h</div><div>Latency: 18 ms</div><div class="text-red-400">Video payload dropped by scheduler</div></div></div>';
 
                 } else {
                     morphNode(nodeUplink, {
-                        text: "Video Upload", desc: "Bird's Eye (MP4)", icon: "fa-file-video", color: "blue", tag: "Debug Stream"
+                        text: "Full Upload", desc: "", icon: "fa-file-video", color: "blue", tag: "EXECUTION UNIT"
                     });
                     conn2.classList.remove('telemetry-flow'); conn2.classList.add('flow');
                     rewriteBadge.classList.add('hidden');
@@ -579,11 +580,11 @@ def lane_keeping_task(camera):
 
                 if (state === 'cpu_opt') {
                     morphNode(nodeAlgo, {
-                        text: "2D Edge Detect", desc: "Skip IPM / Canny", icon: "fa-compress-arrows-alt", color: "amber", tag: "Fast / Low CPU"
+                        text: "Lightweight Scheduler", desc: "Compute-Optimized", icon: "fa-bolt", color: "amber", tag: "ADAPTIVE SCHEDULER"
                     });
                 } else {
                     morphNode(nodeAlgo, {
-                        text: "IPM + PolyFit", desc: "Inverse Perspective Mapping", icon: "fa-road", color: "blue", tag: "Standard Precision"
+                        text: "Adaptive Scheduler", desc: "Dynamic Resource Allocation", icon: "fa-project-diagram", color: "blue", tag: "ADAPTIVE SCHEDULER"
                     });
                 }
             }
@@ -624,10 +625,10 @@ def lane_keeping_task(camera):
             updateSim();
 
             if (document.querySelector('.video-label')) {
-                document.querySelector('.video-label').innerHTML = '<i class="fas fa-video mr-1"></i>Input: Front View';
+                document.querySelector('.video-label').innerHTML = '<i class="fas fa-database mr-1"></i>RAW FEED';
             }
             if (document.querySelector('.video-label.text-blue-100')) {
-                document.querySelector('.video-label.text-blue-100').innerHTML = '<i class="fas fa-eye mr-1"></i>Output: Bird\'s Eye (IPM)';
+                document.querySelector('.video-label.text-blue-100').innerHTML = '<i class="fas fa-cogs mr-1"></i>VISUAL STREAM';
             }
             if (outputOverlay) {
                 outputOverlay.classList.add('hidden');
