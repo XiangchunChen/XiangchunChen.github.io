@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xiangchun Chen - Research Demos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: #f3ede1;
+            color: #5c5c5c;
+        }
+
+        .demo-card {
+            background-color: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            text-decoration: none;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .demo-card-banner {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fbfbfb;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .icon-box-large {
+            background-color: #ffffff;
+            border-radius: 20px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            font-size: 2rem;
+            z-index: 20;
+            color: #1a1a1a;
+        }
+
+        .badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .text-dark { color: #111111; }
+        .text-medium { color: #222222; }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
+        <a href="index.html" class="font-bold text-xl text-dark hover:text-gray-600 transition flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-600 shadow-sm border border-gray-100">
+                <i class="fas fa-home"></i>
+            </span>
+            <span class="hidden sm:inline">Xiangchun Chen</span>
+        </a>
+        <div class="flex items-center gap-6">
+            <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-dark transition">Home</a>
+            <span class="text-sm font-medium px-4 py-2 bg-white text-dark rounded-full border border-gray-100 shadow-sm">Research Demos</span>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="pt-16 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+
+        <div class="text-center mb-16 max-w-2xl mx-auto">
+            <h1 class="text-4xl md:text-[42px] font-semibold text-dark tracking-tight mb-4">Research Demonstrations</h1>
+            <p class="text-base text-[#5c5c5c] leading-relaxed">
+                A collection of interactive platforms and systems developed as part of my academic research.
+            </p>
+        </div>
+
+        <!-- Demo Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            
+            <!-- Demo 1: PolyScheduler -->
+            <a href="demo/demo.html" class="demo-card">
+                <div class="demo-card-banner">
+                    <!-- Subtle background pattern -->
+                    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 20px 20px;"></div>
+                    
+                    <div class="icon-box-large">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+
+                    <div class="badge">
+                        <i class="fas fa-circle text-[8px] animate-pulse text-green-400"></i> Code UI
+                    </div>
+                </div>
+                <div class="p-8 flex flex-col flex-grow">
+                    <h2 class="text-2xl font-semibold text-dark mb-1">PolyScheduler</h2>
+                    <h3 class="text-sm font-medium text-gray-500 mb-4">Self-Evolving Scheduling Agent for Edge</h3>
+                    <p class="text-[#5c5c5c] text-sm leading-relaxed mb-8 flex-grow">
+                        An interactive environment demonstrating context-aware scheduling policies for visual data processing. It dynamically optimizes compute and network resources with real-time AI logic rewriting.
+                    </p>
+                    <div class="flex items-center text-sm font-semibold text-dark group mt-auto">
+                        Explore Demo
+                        <span class="ml-2 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-[#1a1a1a] group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-arrow-right text-[12px]"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Demo 2: PolyClaw -->
+            <a href="demo2/demo2.html" class="demo-card">
+                <div class="demo-card-banner bg-white">
+                    <img src="demo2/EdgeClaw.png" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-[2px]" onerror="this.src='./imgs/xiangchunchen.jpg'" alt="Background">
+                    <div class="absolute inset-0 bg-white/40"></div>
+                    
+                    <div class="icon-box-large">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+
+                    <div class="badge">
+                        <i class="fas fa-play text-[10px]"></i> Video
+                    </div>
+                </div>
+                <div class="p-8 flex flex-col flex-grow">
+                    <h2 class="text-2xl font-semibold text-dark mb-1">PolyClaw</h2>
+                    <h3 class="text-sm font-medium text-gray-500 mb-4">Local-First, Privacy-by-Design OpenClaw</h3>
+                    <p class="text-[#5c5c5c] text-sm leading-relaxed mb-8 flex-grow">
+                        A robust, privacy-preserving edge platform. This demo details its core capabilities ensuring that all computation happens locally, maintaining high security without sacrificing edge intelligence.
+                    </p>
+                    <div class="flex items-center text-sm font-semibold text-dark group mt-auto">
+                        Explore Demo
+                        <span class="ml-2 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-[#1a1a1a] group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-arrow-right text-[12px]"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-gray-200/50 bg-[#f3ede1]/80 backdrop-blur-md pt-8">
+        <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+            <div class="text-[#5c5c5c] text-sm text-center">
+                &copy; 2024 Xiangchun Chen. Research Project.
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
