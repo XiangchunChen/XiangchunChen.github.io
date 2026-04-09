@@ -1,18 +1,18 @@
-
 <!DOCTYPE html>
 
 <head>
-    <meta name="keywords" content="Xiangchun Chen, polyu, 香港理工大学, the hong kong polytechnic university, edge computing, federated learning">
+    <meta name="keywords"
+        content="Xiangchun Chen, polyu, 香港理工大学, the hong kong polytechnic university, edge computing, federated learning">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-179394887-1"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    
-    gtag('config', 'UA-179394887-1');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-179394887-1');
     </script>
-    
+
     <meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="description" content="Xiangchun Chen">
@@ -23,604 +23,727 @@
     <!-- MathJax -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
     <!-- End MathJax -->
-<style>
-/* index.html 内 <style> 区域追加/替换 */
-#ai-chat-widget {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 360px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
-  border-radius: 24px;
-  background: #fff;
-  overflow: visible;
-  z-index: 1000;
-  font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
-  transition: all 0.3s;
-}
+    <style>
+        /* index.html 内 <style> 区域追加/替换 */
+        #ai-chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 360px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-radius: 24px;
+            background: #fff;
+            overflow: visible;
+            z-index: 1000;
+            font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
+            transition: all 0.3s;
+        }
 
-#chat-header {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  color: #4a4a4a;
-  padding: 18px 20px;
-  border-radius: 24px 24px 0 0;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  position: relative;
-  border-bottom: 1px solid rgba(255,255,255,0.5);
-}
+        #chat-header {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #4a4a4a;
+            padding: 18px 20px;
+            border-radius: 24px 24px 0 0;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
 
-.mascot-3d {
-  position: absolute;
-  top: -15px;
-  left: 20px;
-  width: 70px;
-  height: 70px;
-  z-index: 1001;
-  animation: floatMascot 3s ease-in-out infinite;
-}
-
-
-.mascot-3d img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
-}
-.header-title {
-  margin-left: 70px;
-}
-
-#chat-content {
-  display: flex;
-  flex-direction: column;
-  height: 420px;
-  background: #fff;
-  border-radius: 0 0 24px 24px;
-}
-
-#chat-history {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  background: #fcfcfc;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.msg {
-  max-width: 80%;
-  padding: 12px 18px;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  position: relative;
-}
-.msg-ai {
-  align-self: flex-start;
-  background: #fff;
-  color: #333;
-  border-radius: 4px 20px 20px 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border: 1px solid #f0f0f0;
-}
-.msg-user {
-  align-self: flex-end;
-  background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
-  color: #1a472a;
-  border-radius: 20px 4px 20px 20px;
-  box-shadow: 0 2px 8px rgba(98,204,107,0.2);
-}
-
-#chat-input-area {
-  display: flex;
-  padding: 15px;
-  background: #fff;
-  border-top: 1px solid #f0f0f0;
-  border-radius: 0 0 24px 24px;
-}
-#chat-input {
-  flex: 1;
-  padding: 12px 20px;
-  border: 2px solid #eee;
-  border-radius: 30px;
-  outline: none;
-  margin-right: 12px;
-  font-size: 0.95rem;
-  background-color: #f9f9f9;
-  transition: border-color 0.3s;
-}
-#chat-input:focus {
-  border-color: #a8edea;
-  background-color: #fff;
-}
-#chat-btn {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  color: #555;
-  border: none;
-  padding: 0 24px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 0.9rem;
-  transition: all 0.2s;
-  box-shadow: 0 4px 10px rgba(168,237,234,0.3);
-}
-#chat-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(168,237,234,0.4);
-}
-#chat-btn:active {
-  transform: translateY(0);
-}
-
-@keyframes floatMascot {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(2deg); }
-}
-.sponsor-logos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin: 1.5rem 0;
-}
-.sponsor-logos img {
-    display: block;
-    height: 100px;
-}
-/* Additional CSS for enhanced styling */
-#layout-content > * {
-    animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
-}
-
-#layout-content > *:nth-child(1) { animation-delay: 0.1s; }
-#layout-content > *:nth-child(2) { animation-delay: 0.2s; }
-#layout-content > *:nth-child(3) { animation-delay: 0.3s; }
-#layout-content > *:nth-child(4) { animation-delay: 0.4s; }
-#layout-content > *:nth-child(5) { animation-delay: 0.5s; }
-
-/* Research interests highlight */
-nav {
-    transition: all 0.3s ease;
-}
-
-.scrolled {
-    background: rgba(255,255,255,0.98);
-    box-shadow: 0 2px 20px rgba(0,0,0,0.15);
-}
-
-/* Publication highlights */
-.publication-item {
-    position: relative;
-    overflow: hidden;
-}
-
-.publication-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-}
-
-.publication-item:hover::before {
-    left: 100%;
-}
-
-/* Responsive navigation */
-@media (max-width: 768px) {
-    nav {
-        padding: 1rem;
-    }
-
-    nav div:last-child {
-        gap: 1rem;
-    }
-
-    nav a {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    nav {
-        padding: 0.8rem;
-    }
-
-    nav div:last-child {
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    nav a {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.8rem;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-#ai-chat-widget {
-position: fixed; bottom: 20px; right: 20px; width: 300px;
-background: white; border: 1px solid #ccc; border-radius: 10px;
-box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999; font-family: sans-serif;
-display: flex; flex-direction: column; overflow: hidden;
-}
-#chat-header { background: #007bff; color: white; padding: 10px; font-weight: bold; cursor: pointer; }
-#chat-history { height: 200px; overflow-y: auto; padding: 10px; background: #f9f9f9; font-size: 13px; }
-#chat-input-area { display: flex; border-top: 1px solid #eee; }
-#chat-input { flex: 1; border: none; padding: 10px; outline: none; }
-#chat-btn { border: none; background: #007bff; color: white; padding: 0 15px; cursor: pointer; }
-.msg-user { text-align: right; color: #333; margin: 5px 0; }
-.msg-ai { text-align: left; color: #0056b3; margin: 5px 0; }
+        .mascot-3d {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 70px;
+            height: 70px;
+            z-index: 1001;
+            animation: floatMascot 3s ease-in-out infinite;
+        }
 
 
-</style>
+        .mascot-3d img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+        }
+
+        .header-title {
+            margin-left: 70px;
+        }
+
+        #chat-content {
+            display: flex;
+            flex-direction: column;
+            height: 420px;
+            background: #fff;
+            border-radius: 0 0 24px 24px;
+        }
+
+        #chat-history {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #fcfcfc;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 12px 18px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .msg-ai {
+            align-self: flex-start;
+            background: #fff;
+            color: #333;
+            border-radius: 4px 20px 20px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        .msg-user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            color: #1a472a;
+            border-radius: 20px 4px 20px 20px;
+            box-shadow: 0 2px 8px rgba(98, 204, 107, 0.2);
+        }
+
+        #chat-input-area {
+            display: flex;
+            padding: 15px;
+            background: #fff;
+            border-top: 1px solid #f0f0f0;
+            border-radius: 0 0 24px 24px;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #eee;
+            border-radius: 30px;
+            outline: none;
+            margin-right: 12px;
+            font-size: 0.95rem;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        #chat-input:focus {
+            border-color: #a8edea;
+            background-color: #fff;
+        }
+
+        #chat-btn {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #555;
+            border: none;
+            padding: 0 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(168, 237, 234, 0.3);
+        }
+
+        #chat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(168, 237, 234, 0.4);
+        }
+
+        #chat-btn:active {
+            transform: translateY(0);
+        }
+
+        @keyframes floatMascot {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(2deg);
+            }
+        }
+
+        .sponsor-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .sponsor-logos img {
+            display: block;
+            height: 100px;
+        }
+
+        /* Additional CSS for enhanced styling */
+        #layout-content>* {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        #layout-content>*:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        #layout-content>*:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        #layout-content>*:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        #layout-content>*:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        #layout-content>*:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        /* Research interests highlight */
+        nav {
+            transition: all 0.3s ease;
+        }
+
+        .scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Publication highlights */
+        .publication-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .publication-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .publication-item:hover::before {
+            left: 100%;
+        }
+
+        /* Responsive navigation */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            nav div:last-child {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem;
+            }
+
+            nav div:last-child {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #ai-chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        #chat-header {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #chat-history {
+            height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f9f9f9;
+            font-size: 13px;
+        }
+
+        #chat-input-area {
+            display: flex;
+            border-top: 1px solid #eee;
+        }
+
+        #chat-input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            outline: none;
+        }
+
+        #chat-btn {
+            border: none;
+            background: #007bff;
+            color: white;
+            padding: 0 15px;
+            cursor: pointer;
+        }
+
+        .msg-user {
+            text-align: right;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .msg-ai {
+            text-align: left;
+            color: #0056b3;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 
 <body>
     <div id="layout-content">
-        <nav style="position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
-            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+        <nav
+            style="position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
+            <div
+                style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
                 <div style="font-weight: 600; color: var(--primary-color);">Xiangchun Chen</div>
                 <div style="display: flex; gap: 2rem;">
                     <a href="#education">Education</a>
                     <a href="#publications">Publications</a>
                     <a href="#teaching">Teaching</a>
                     <a href="#honors">Honors</a>
-                    <a href="demos.html" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #4a4a4a; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(168,237,234,0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(168,237,234,0.4);'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(168,237,234,0.3);'">Demo</a>
+                    <a href="demos.html"
+                        style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #4a4a4a; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(168,237,234,0.3);"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(168,237,234,0.4);'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(168,237,234,0.3);'">Demo</a>
                 </div>
             </div>
         </nav>
         <div style="display: flex; align-items: center; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap;">
-        <img src="./imgs/xiangchunchen.jpg" alt="Xiangchun Chen" />
-        <div style="flex: 1;">
-            <h1>Xiangchun Chen</h1>
-            <p style="font-size: 1.2rem; font-weight: 500; color: var(--secondary-color); margin-bottom: 0.5rem;"><b>Ph.D. Candidate</b></p>
+            <img src="./imgs/xiangchunchen.jpg" alt="Xiangchun Chen" />
+            <div style="flex: 1;">
+                <h1>Xiangchun Chen</h1>
+                <p style="font-size: 1.2rem; font-weight: 500; color: var(--secondary-color); margin-bottom: 0.5rem;">
+                    <b>Ph.D. Candidate</b></p>
 
-        <a href="https://www.comp.polyu.edu.hk/" target=_blank>Department of Computing (COMP)</a><br />
-        <a href="https://www.polyu.edu.hk/feng/" target=_blank>Faculty of Engineering</a><br />
-        <a href="https://www.polyu.edu.hk/web/en/home/index.html" target=_blank>The Hong Kong Polytechnic University</a> <br /> 
+                <a href="https://www.comp.polyu.edu.hk/" target=_blank>Department of Computing (COMP)</a><br />
+                <a href="https://www.polyu.edu.hk/feng/" target=_blank>Faculty of Engineering</a><br />
+                <a href="https://www.polyu.edu.hk/web/en/home/index.html" target=_blank>The Hong Kong Polytechnic
+                    University</a> <br />
 
-        <p style="margin-top: 1rem;">
-            <b>Office:</b> PQ 503, PQ Wing, PolyU, Hung Hom, Hong Kong.<br />
-            <b>Email:</b>
-            <span style="font-family: monospace; background: var(--light-bg); padding: 0.2rem 0.5rem; border-radius: 4px;">
-                xiang-chun.chen AT connect.polyu.hk
-            </span>
-            <br />
-            <a href="https://scholar.google.com.hk/citations?user=WtxyVYMAAAAJ&hl=zh-CN"><b>Google Scholar</b></a> |
-            <a href=""><b>My Full CV</b></a>
-        </p>
+                <p style="margin-top: 1rem;">
+                    <b>Office:</b> PQ 503, PQ Wing, PolyU, Hung Hom, Hong Kong.<br />
+                    <b>Email:</b>
+                    <span
+                        style="font-family: monospace; background: var(--light-bg); padding: 0.2rem 0.5rem; border-radius: 4px;">
+                        xiang-chun.chen AT connect.polyu.hk
+                    </span>
+                    <br />
+                    <a href="https://scholar.google.com.hk/citations?user=WtxyVYMAAAAJ&hl=zh-CN"><b>Google
+                            Scholar</b></a> |
+                    <a href=""><b>My Full CV</b></a>
+                </p>
+            </div>
         </div>
-        </div>
-            <h2>Short Bio</h2>
-            <p align="justify"> Xiangchun Chen is a PhD candidate in Department of Computing, <a href = "https://www.polyu.edu.hk/"> <b> The Hong Kong Polytechnic University </b></a>,
-                supervised by <a href = "http://www4.comp.polyu.edu.hk/~csjcao/"><b>Prof. Cao Jiannong</b></a>.
-                Previously, he received the Bachelor Degree of Computer Science and Technology from
-                <a href = "http://www.cs.hit.edu.cn/?q=node/201"><b>Faculty of Computing</b></a>, Harbin Institute of Technology in 2021.
+        <h2>Short Bio</h2>
+        <p align="justify"> Xiangchun Chen is a PhD candidate in Department of Computing, <a
+                href="https://www.polyu.edu.hk/"> <b> The Hong Kong Polytechnic University </b></a>,
+            supervised by <a href="http://www4.comp.polyu.edu.hk/~csjcao/"><b>Prof. Cao Jiannong</b></a>.
+            Previously, he received the Bachelor Degree of Computer Science and Technology from
+            <a href="http://www.cs.hit.edu.cn/?q=node/201"><b>Faculty of Computing</b></a>, Harbin Institute of
+            Technology in 2021.
 
-        <p align="justify"> His research interests lie in edge computing, reinforcement learning, digital twin, AI Agents and Large Language Models (LLMs). His current work focuses on building autonomous AI agents for complex scheduling and resource management.</p>
-            
+        <p align="justify"> His research interests include AI Agents, Large Language Model Inference, Reinforcement
+            Learning, Digital Twins, and Edge AI. His current work focuses on developing self-evolving AI agents for
+            resource-constrained devices/environments.</p>
+
         </p>
-<!--        <div id="ai-chat-widget">-->
-<!--          <div id="chat-header" onclick="toggleChat()">🤖 Ask My AI Agent</div>-->
-<!--          <div id="chat-content" style="display:none;"> <div id="chat-history">-->
-<!--              <div class="msg-ai">Hello! I'm Xiangchun's AI Assistant. Ask me about his research!</div>-->
-<!--            </div>-->
-<!--            <div id="chat-input-area">-->
-<!--              <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">-->
-<!--              <button id="chat-btn" onclick="sendMessage()">Send</button>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div id="ai-chat-widget">-->
-<!--          <div id="chat-header" onclick="toggleChat()">-->
-<!--            <div class="ai-avatar">-->
-<!--              &lt;!&ndash; 推荐用GIF/SVG动画，或Lottie动画容器 &ndash;&gt;-->
-<!--              <img src="./imgs/usagi.gif" alt="AI Avatar" />-->
-<!--            </div>-->
-<!--            <span class="ai-title">Ask My AI Agent</span>-->
-<!--          </div>-->
-<!--          <div id="chat-content" style="display:none;">-->
-<!--            <div id="chat-history">-->
-<!--              <div class="msg-ai">Hello! I'm Xiangchun's AI Assistant. Ask me about his research!</div>-->
-<!--            </div>-->
-<!--            <div id="chat-input-area">-->
-<!--              <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">-->
-<!--              <button id="chat-btn" onclick="sendMessage()">-->
-<!--                <svg width="20" height="20" fill="none"><path d="M2 10l16-6-6 16-2-7-7-3z" fill="#fff"/></svg>-->
-<!--              </button>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div id="ai-chat-widget">-->
+        <!--          <div id="chat-header" onclick="toggleChat()">🤖 Ask My AI Agent</div>-->
+        <!--          <div id="chat-content" style="display:none;"> <div id="chat-history">-->
+        <!--              <div class="msg-ai">Hello! I'm Xiangchun's AI Assistant. Ask me about his research!</div>-->
+        <!--            </div>-->
+        <!--            <div id="chat-input-area">-->
+        <!--              <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">-->
+        <!--              <button id="chat-btn" onclick="sendMessage()">Send</button>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div id="ai-chat-widget">-->
+        <!--          <div id="chat-header" onclick="toggleChat()">-->
+        <!--            <div class="ai-avatar">-->
+        <!--              &lt;!&ndash; 推荐用GIF/SVG动画，或Lottie动画容器 &ndash;&gt;-->
+        <!--              <img src="./imgs/usagi.gif" alt="AI Avatar" />-->
+        <!--            </div>-->
+        <!--            <span class="ai-title">Ask My AI Agent</span>-->
+        <!--          </div>-->
+        <!--          <div id="chat-content" style="display:none;">-->
+        <!--            <div id="chat-history">-->
+        <!--              <div class="msg-ai">Hello! I'm Xiangchun's AI Assistant. Ask me about his research!</div>-->
+        <!--            </div>-->
+        <!--            <div id="chat-input-area">-->
+        <!--              <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">-->
+        <!--              <button id="chat-btn" onclick="sendMessage()">-->
+        <!--                <svg width="20" height="20" fill="none"><path d="M2 10l16-6-6 16-2-7-7-3z" fill="#fff"/></svg>-->
+        <!--              </button>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
         <!-- 聊天组件极致可爱3D风格实现 -->
         <div id="ai-chat-widget">
-          <div id="chat-header" onclick="toggleChat()">
-            <div class="mascot-3d">
-              <img src="./imgs/usagi.gif" alt="3D Usagi" />
+            <div id="chat-header" onclick="toggleChat()">
+                <div class="mascot-3d">
+                    <img src="./imgs/usagi.gif" alt="3D Usagi" />
+                </div>
+                <span class="header-title">Ask My AI Agent</span>
             </div>
-            <span class="header-title">Ask My AI Agent</span>
-          </div>
-          <div id="chat-content" style="display:none;">
-            <div id="chat-history">
-              <div class="msg msg-ai">Hello! I'm Xiangchun's AI Assistant. 🐰<br>Ask me about his research!</div>
+            <div id="chat-content" style="display:none;">
+                <div id="chat-history">
+                    <div class="msg msg-ai">Hello! I'm Xiangchun's AI Assistant. 🐰<br>Ask me about his research!</div>
+                </div>
+                <div id="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">
+                    <button id="chat-btn" onclick="sendMessage()">Send</button>
+                </div>
             </div>
-            <div id="chat-input-area">
-              <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">
-              <button id="chat-btn" onclick="sendMessage()">Send</button>
-            </div>
-          </div>
         </div>
-            <h2 id="education">Education Background</h2>
-            <ul>
-                <P>
+        <h2 id="education">Education Background</h2>
+        <ul>
+            <P>
                 <li>
-                    <font style="color:#527bbd;"><b>Ph.D.:</b></font>&nbsp Hong Kong Polytechnic University,&nbsp Hong Kong, China. Aug. 2021 - Now <br>
+                    <font style="color:#527bbd;"><b>Ph.D.:</b></font>&nbsp Hong Kong Polytechnic University,&nbsp Hong
+                    Kong, China. Aug. 2021 - Now <br>
                     Supervisor: <font style="color:#527bbd;">Prof. Cao Jiannong, IEEE Fellow</font>. <br>
-                </p>
+            </p>
 
-                <P>
+            <P>
                 <li>
-                    <font style="color:#527bbd;"><b>Visiting PhD Student:</b></font>&nbsp National Institute of Informatics,&nbsp Tokyo, Japan. Oct. 2024 - Mar. 2025 <br>
+                    <font style="color:#527bbd;"><b>Visiting PhD Student:</b></font>&nbsp National Institute of
+                    Informatics,&nbsp Tokyo, Japan. Oct. 2024 - Mar. 2025 <br>
                     Supervisor: <font style="color:#527bbd;">Prof. Ji Yusheng, IEEE Fellow</font>. <br>
+            </p>
+
+            <P>
+                <li>
+                    <font style="color:#527bbd;"><b>B.E.:</b></font>&nbsp Harbin Institute of Technology,&nbsp Harbin,
+                    China. Sep. 2017 - Jul. 2021 <br>
+            </p>
+        </ul>
+
+        <h2 id="publications">Publications</h2>
+        <h3 id="journal-articles">Selected Journal Publications</h3>
+
+        <ul>
+            <li>
+                <p>
+                    <font style="color:#527bbd;"><b>[TMC]</font></b>&nbsp <a
+                        href="https://ieeexplore.ieee.org/document/11224639" target=_blank>
+                        Decentralized Task Offloading in Collaborative Edge Computing: A Digital Twin assisted
+                        Multi-agent Reinforcement Learning Approach</a>, <br />
+                    <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Rui Cao, Yuvraj Sahni, Mingjin Zhang, and Yusheng Ji.
+                    <br />
+                    in IEEE Transactions on Mobile Computing, 2025.<br />
+                    (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail"
+                        target=_blank><b>CCF A, SCI I, JCR Q1</b></a>).<br />
                 </p>
-
-                <P>
-                <li>
-                    <font style="color:#527bbd;"><b>B.E.:</b></font>&nbsp Harbin Institute of Technology,&nbsp Harbin, China. Sep. 2017 - Jul. 2021 <br>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <p>
+                    <font style="color:#527bbd;"><b>[TMC]</font></b>&nbsp <a
+                        href="https://ieeexplore.ieee.org/abstract/document/10767295" target=_blank>
+                        Mobility-aware Dependent Task Offloading in Edge Computing: A Digital Twin-assisted
+                        Reinforcement Learning Approach</a>, <br />
+                    <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Mingjin Zhang, Zhixuan Liang, and Lei
+                    Yang. <br />
+                    in IEEE Transactions on Mobile Computing, 2024.<br />
+                    (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail"
+                        target=_blank><b>CCF A, SCI I,JCR Q1</b></a>).<br />
                 </p>
-            </ul>
-
-            <h2 id="publications">Publications</h2>
-            <h3 id="journal-articles">Selected Journal Publications</h3>
-
-            <ul>
-                <li>
-                    <p><font style="color:#527bbd;"><b>[TMC]</font></b>&nbsp <a href="https://ieeexplore.ieee.org/document/11224639" target=_blank>
-                        Decentralized Task Offloading in Collaborative Edge Computing: A Digital Twin assisted Multi-agent Reinforcement Learning Approach</a>, <br />
-                        <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Rui Cao, Yuvraj Sahni, Mingjin Zhang, and Yusheng Ji. <br />
-                        in IEEE Transactions on Mobile Computing, 2025.<br />
-                        (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail" target=_blank><b>CCF A, SCI I, JCR Q1</b></a>).<br /> </p>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <p><font style="color:#527bbd;"><b>[TMC]</font></b>&nbsp <a href="https://ieeexplore.ieee.org/abstract/document/10767295" target=_blank>
-                        Mobility-aware Dependent Task Offloading in Edge Computing: A Digital Twin-assisted Reinforcement Learning Approach</a>, <br />
-                        <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Mingjin Zhang, Zhixuan Liang, and Lei Yang. <br />
-                        in IEEE Transactions on Mobile Computing, 2024.<br />
-                        (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail" target=_blank><b>CCF A, SCI I,JCR Q1</b></a>).<br /> </p>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <p><font style="color:#527bbd;"><b>[TCC]</font></b>&nbsp <a href="https://ieeexplore.ieee.org/document/10480253
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <p>
+                    <font style="color:#527bbd;"><b>[TCC]</font></b>&nbsp <a href="https://ieeexplore.ieee.org/document/10480253
 " target=_blank>
-                        Dynamic Task Offloading in Edge Computing based on Dependency-aware Reinforcement Learning</a>, <br />
-                        <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Shan Jiang, and Zhixuan Liang. <br />
-                        in IEEE Transactions on Cloud Computing, 2024.<br />
-                        (<a href="https://www.letpub.com.cn/index.php?journalid=10347&page=journalapp&view=detail" target=_blank><b>IEEE TCC Best Paper Award 2024, SCI II, JCR Q1</b></a>).<br /> </p>
-                </li>
-            </ul>
-            <h3 id="conference-articles">Selected Conference Publications</h3>
-            <ul>
+                        Dynamic Task Offloading in Edge Computing based on Dependency-aware Reinforcement Learning</a>,
+                    <br />
+                    <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Shan Jiang, and Zhixuan Liang. <br />
+                    in IEEE Transactions on Cloud Computing, 2024.<br />
+                    (<a href="https://www.letpub.com.cn/index.php?journalid=10347&page=journalapp&view=detail"
+                        target=_blank><b>IEEE TCC Best Paper Award 2024, SCI II, JCR Q1</b></a>).<br />
+                </p>
+            </li>
+        </ul>
+        <h3 id="conference-articles">Selected Conference Publications</h3>
+        <ul>
+            <li>
+                <p>
+                    <font style="color:#527bbd;"><b>[MASS]</font></b>&nbsp <a
+                        href="https://doi.org/10.1109/MASS58611.2023.00012" target=_blank>
+                        Digital Twin-assisted Reinforcement Learning for Dynamic Microservice Offloading in Edge
+                        Computing</a>, <br />
+                    <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Zhixuan Liang, Yuvraj Sahni, and Mingjin Zhang. <br />
+                    in IEEE 20th International Conference on Mobile Ad Hoc and Smart Systems (MASS '23), 2023.<br />
+                    (<a href="https://www.ccf.org.cn/Academic_Evaluation/NIS/" target=_blank><b>CCF-C</b></a>).<br />
+                </p>
+            </li>
+        </ul>
+
+
+        <h2 id="teaching">Teaching Experience</h2>
+
+        <ul>
+            <P>
                 <li>
-                    <p><font style="color:#527bbd;"><b>[MASS]</font></b>&nbsp <a href="https://doi.org/10.1109/MASS58611.2023.00012" target=_blank>
-                        Digital Twin-assisted Reinforcement Learning for Dynamic Microservice Offloading in Edge Computing</a>, <br />
-                        <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Zhixuan Liang, Yuvraj Sahni, and Mingjin Zhang. <br />
-                        in IEEE 20th International Conference on Mobile Ad Hoc and Smart Systems (MASS '23), 2023.<br />
-                        (<a href="https://www.ccf.org.cn/Academic_Evaluation/NIS/" target=_blank><b>CCF-C</b></a>).<br /> </p>
-                </li>
-            </ul>
-
-
-            <h2 id="teaching">Teaching Experience</h2>
-
-            <ul>
-                    <P>
-                        <li>
-                            Teaching Assistant, Metaverse Applications: Design And Case Studies, Spring 2024.
+                    Teaching Assistant, Metaverse Applications: Design And Case Studies, Spring 2024.
 
                     <P>
                     <P>
-                        <li>
-                            Teaching Assistant, Programming Fundamentals and Applications, Fall 2023.
+                <li>
+                    Teaching Assistant, Programming Fundamentals and Applications, Fall 2023.
 
                     <P>
                     <P>
-                    <li>
-                        Teaching Assistant, Computer Networking, Spring 2023.
+                <li>
+                    Teaching Assistant, Computer Networking, Spring 2023.
 
                     <P>
-                    <li>
-                        Teaching Assistant, Programming Fundamentals and Applications, Fall 2022.
+                <li>
+                    Teaching Assistant, Programming Fundamentals and Applications, Fall 2022.
 
                     <P>
-                    <li>
+                <li>
                     Teaching Assistant, Programming Fundamentals, Spring 2022.
 
                     <P>
-                    <li>
+                <li>
                     Teaching Assistant, Computer Programming, Fall 2021.
-                  </ul>
-<!--            <h2>Work Experience</h2>-->
+        </ul>
+        <!--            <h2>Work Experience</h2>-->
 
-<!--            <ul>-->
-<!--                <P>-->
-<!--                    <li>-->
-<!--                        Back-end Intern at Intelligent Service Department, Ant Financial. The main duty involves project “Alipay Exclusive Customer Service".-->
-<!--            </ul>-->
-
-            
-<h2>Academic Service</h2> 
-
-<h3>PC Member/Journal Reviewer</h3>
-    <ul>
-        <li>Reviewer for IEEE Transactions on Mobile Computing (<b>IEEE TMC</b>)</li>
-    </ul>
-    <ul>
-        <li>Reviewer for IEEE Transactions on Cognitive Communications and Networking (<b>IEEE TCCN</b>) </li>
-    </ul>
-    <ul>
-        <li>Reviewer for IEEE Transactions on IEEE/ACM Transactions on Networking(<b>IEEE TON</b>) </li>
-    </ul>
-    <ul>
-        <li>Reviewer for IEEE Internet of Things Journal (<b>IEEE IOT-J</b>)</li>
-    </ul>
-<!--<h3>Membership</h3>-->
-
-<h2 id="honors">Selected Honors</h2>
-
-<ul>
-        <li>IEEE TCC 2024 Best Paper Award.<br>
-        Awarded by the lEEE ComputerSociety Publications Board, 2025.
-        </li>
-
-        <li>Postgraduate Studentship, HKPolyU.<br>
-        Awarded by Hong Kong Polytechnic University, 2021-2025.
-        </li>
-
-        <li>Ren-Min Scholarship.<br>
-        Awarded by Harbin Institute of Technology, 2019-2020.
-        </li>
-        
-</ul>
+        <!--            <ul>-->
+        <!--                <P>-->
+        <!--                    <li>-->
+        <!--                        Back-end Intern at Intelligent Service Department, Ant Financial. The main duty involves project “Alipay Exclusive Customer Service".-->
+        <!--            </ul>-->
 
 
-<h2>Sponsors/Collaborators</h2>
-I sincerely thank these sponsors/collaborators for providing great support for my research.
-<div class="sponsor-logos">
-    <img src="./imgs/polyu.jpg" height="100" alt="PolyU">
-    <img src="./imgs/IMCL.png" height="100" alt="IMCL">
-    <img src="./imgs/KLab.jpg" height="100" alt="NII">
-</div>
+        <h2>Academic Service</h2>
 
-<h2>News</h2>
-     <ul>
-        <P>
-        <li>
-             [10/2025]  Congratulations! Our paper, "Reliability-aware Task Offloading in Decentralized Edge Computing: A Digital Twin assisted Multi-agent Reinforcement Learning Approach.", has been accepted at IEEE Transactions on Mobile Computing！
-        </li>
-        </P>
-    </ul>
-    <ul>
-        <P>
-        <li>
-             [08/2025]  Congratulations! Our paper, "Dynamic Task Offloading in EdgeComputing Based on Dependency-AwareReinforcement Learning", has been selected as the Winner of the 2024 Best Paper Award, from lEEE Transactions on Cloud Computing by the lEEE ComputerSociety Publications Board！
-        </li>
-        </P>
-    </ul>
-    <ul>
-        <P>
-        <li>
-             [11/2024]  Congratulations! Our paper "Mobility-aware Dependent Task Offloading in Edge Computing: A Digital Twin-assisted Reinforcement Learning Approach" has been accepted at IEEE Transactions on Mobile Computing！
-        </li>
-        </P>
-    </ul>
-</div>
-<script>
-  const WORKER_URL = "https://ai-research-assistant.xiangchunchen78.workers.dev/";
+        <h3>PC Member/Journal Reviewer</h3>
+        <ul>
+            <li>Reviewer for IEEE Transactions on Mobile Computing (<b>IEEE TMC</b>)</li>
+        </ul>
+        <ul>
+            <li>Reviewer for IEEE Transactions on Cognitive Communications and Networking (<b>IEEE TCCN</b>) </li>
+        </ul>
+        <ul>
+            <li>Reviewer for IEEE Transactions on IEEE/ACM Transactions on Networking(<b>IEEE TON</b>) </li>
+        </ul>
+        <ul>
+            <li>Reviewer for IEEE Internet of Things Journal (<b>IEEE IOT-J</b>)</li>
+        </ul>
+        <!--<h3>Membership</h3>-->
 
-  function toggleChat() {
-    const content = document.getElementById('chat-content');
-    content.style.display = content.style.display === 'none' ? 'block' : 'none';
-  }
+        <h2 id="honors">Selected Honors</h2>
 
-  function handleEnter(e) { if(e.key === 'Enter') sendMessage(); }
+        <ul>
+            <li>IEEE TCC 2024 Best Paper Award.<br>
+                Awarded by the lEEE ComputerSociety Publications Board, 2025.
+            </li>
 
-  async function sendMessage() {
-    const input = document.getElementById('chat-input');
-    const history = document.getElementById('chat-history');
-    const question = input.value.trim();
-    if (!question) return;
+            <li>Postgraduate Studentship, HKPolyU.<br>
+                Awarded by Hong Kong Polytechnic University, 2021-2025.
+            </li>
 
-    // 显示用户提问
-    history.innerHTML += `<div class="msg-user">You: ${question}</div>`;
-    input.value = '';
-    history.scrollTop = history.scrollHeight;
+            <li>Ren-Min Scholarship.<br>
+                Awarded by Harbin Institute of Technology, 2019-2020.
+            </li>
 
-    try {
-        history.innerHTML += `<div class="msg-ai">Thinking...</div>`;
-        const res = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question: question })
-        });
-        const data = await res.json();
+        </ul>
 
-        // 移除 "Thinking..." 并显示回答
-        history.lastElementChild.remove();
-        history.innerHTML += `<div class="msg-ai">AI: ${data.response}</div>`;
-    } catch (err) {
-        history.lastElementChild.innerText = "Error connecting to AI.";
-    }
-    history.scrollTop = history.scrollHeight;
-  }
-</script>
-<script>
-// Add scroll effect to navigation
-window.addEventListener('scroll', function() {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-});
 
-// Add class to publications for visual effects
-window.addEventListener('DOMContentLoaded', function() {
-    // Add publication item class to li elements in publications section
-    const publicationLis = document.querySelectorAll('#publications li');
-    publicationLis.forEach(li => {
-        li.classList.add('publication-item');
-    });
+        <h2>Sponsors/Collaborators</h2>
+        I sincerely thank these sponsors/collaborators for providing great support for my research.
+        <div class="sponsor-logos">
+            <img src="./imgs/polyu.jpg" height="100" alt="PolyU">
+            <img src="./imgs/IMCL.png" height="100" alt="IMCL">
+            <img src="./imgs/KLab.jpg" height="100" alt="NII">
+        </div>
 
-    // Smooth scroll for navigation links (only for internal anchors)
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            // Only apply smooth scroll for internal page anchors (starting with #)
-            if (targetId.startsWith('#')) {
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
+        <h2>News</h2>
+        <ul>
+            <P>
+                <li>
+                    [10/2025] Congratulations! Our paper, "Reliability-aware Task Offloading in Decentralized Edge
+                    Computing: A Digital Twin assisted Multi-agent Reinforcement Learning Approach.", has been accepted
+                    at IEEE Transactions on Mobile Computing！
+                </li>
+            </P>
+        </ul>
+        <ul>
+            <P>
+                <li>
+                    [08/2025] Congratulations! Our paper, "Dynamic Task Offloading in EdgeComputing Based on
+                    Dependency-AwareReinforcement Learning", has been selected as the Winner of the 2024 Best Paper
+                    Award, from lEEE Transactions on Cloud Computing by the lEEE ComputerSociety Publications Board！
+                </li>
+            </P>
+        </ul>
+        <ul>
+            <P>
+                <li>
+                    [11/2024] Congratulations! Our paper "Mobility-aware Dependent Task Offloading in Edge Computing: A
+                    Digital Twin-assisted Reinforcement Learning Approach" has been accepted at IEEE Transactions on
+                    Mobile Computing！
+                </li>
+            </P>
+        </ul>
+    </div>
+    <script>
+        const WORKER_URL = "https://ai-research-assistant.xiangchunchen78.workers.dev/";
+
+        function toggleChat() {
+            const content = document.getElementById('chat-content');
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function handleEnter(e) { if (e.key === 'Enter') sendMessage(); }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const history = document.getElementById('chat-history');
+            const question = input.value.trim();
+            if (!question) return;
+
+            // 显示用户提问
+            history.innerHTML += `<div class="msg-user">You: ${question}</div>`;
+            input.value = '';
+            history.scrollTop = history.scrollHeight;
+
+            try {
+                history.innerHTML += `<div class="msg-ai">Thinking...</div>`;
+                const res = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question })
+                });
+                const data = await res.json();
+
+                // 移除 "Thinking..." 并显示回答
+                history.lastElementChild.remove();
+                history.innerHTML += `<div class="msg-ai">AI: ${data.response}</div>`;
+            } catch (err) {
+                history.lastElementChild.innerText = "Error connecting to AI.";
             }
-            // For external links like demo/demo.html, allow normal navigation
+            history.scrollTop = history.scrollHeight;
+        }
+    </script>
+    <script>
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function () {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
-    });
-});
 
-// Add loading animation
-window.addEventListener('load', function() {
-    document.body.style.opacity = '1';
-    document.body.style.transition = 'opacity 0.3s ease';
-});
-</script>
+        // Add class to publications for visual effects
+        window.addEventListener('DOMContentLoaded', function () {
+            // Add publication item class to li elements in publications section
+            const publicationLis = document.querySelectorAll('#publications li');
+            publicationLis.forEach(li => {
+                li.classList.add('publication-item');
+            });
+
+            // Smooth scroll for navigation links (only for internal anchors)
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    // Only apply smooth scroll for internal page anchors (starting with #)
+                    if (targetId.startsWith('#')) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    // For external links like demo/demo.html, allow normal navigation
+                });
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function () {
+            document.body.style.opacity = '1';
+            document.body.style.transition = 'opacity 0.3s ease';
+        });
+    </script>
 </body>
 
 </html>
