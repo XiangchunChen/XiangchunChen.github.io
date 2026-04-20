@@ -179,15 +179,13 @@ li::before {
 }
 
 /* Publication items */
-li:has(font[color="#527bbd"]) {
+li:has(font[style*="color:#527bbd"]) {
   border-left-color: #527bbd;
   background: linear-gradient(90deg, rgba(44, 90, 160, 0.05) 0%, rgba(255,255,255,0) 100%);
 }
 
 /* Education items */
-li:has(font[color="#527bbd"]:contains("Ph.D.")),
-li:has(font[color="#527bbd"]:contains("Visiting Scholar")),
-li:has(font[color="#527bbd"]:contains("B.E.")) {
+#education + ul > li {
   border-left-color: #00b4d8;
   background: linear-gradient(90deg, rgba(0, 180, 216, 0.05) 0%, rgba(255,255,255,0) 100%);
 }
@@ -220,12 +218,12 @@ font[style*="color:#527bbd"] {
 }
 
 /* Email and contact info styling */
-p:contains("Email:") {
+.contact-info {
   font-weight: 500;
   color: var(--text-color);
 }
 
-p:contains("Email:") b {
+.contact-info b {
   color: var(--primary-color);
 }
 

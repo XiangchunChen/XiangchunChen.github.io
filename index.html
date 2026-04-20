@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta name="keywords"
@@ -15,6 +16,7 @@
 
     <meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Xiangchun Chen">
     <meta name="author" content="Xiangchun Chen">
     <meta property="og:description" content="Xiangchun Chen">
@@ -104,6 +106,8 @@
             font-size: 0.95rem;
             line-height: 1.4;
             position: relative;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         .msg-ai {
@@ -168,6 +172,16 @@
 
         #chat-btn:active {
             transform: translateY(0);
+        }
+
+        #chat-btn:disabled {
+            cursor: wait;
+            opacity: 0.8;
+        }
+
+        #chat-header:focus-visible {
+            outline: 2px solid #a8edea;
+            outline-offset: 4px;
         }
 
         @keyframes floatMascot {
@@ -282,6 +296,26 @@
                 padding: 0.3rem 0.6rem;
                 font-size: 0.8rem;
             }
+
+            #ai-chat-widget {
+                right: 12px;
+                bottom: 12px;
+                width: calc(100vw - 24px);
+            }
+
+            #chat-content {
+                height: min(55vh, 420px);
+            }
+
+            .mascot-3d {
+                width: 60px;
+                height: 60px;
+                left: 16px;
+            }
+
+            .header-title {
+                margin-left: 60px;
+            }
         }
 
         @keyframes fadeInUp {
@@ -330,7 +364,7 @@
                 <a href="https://www.polyu.edu.hk/web/en/home/index.html" target="_blank">The Hong Kong Polytechnic
                     University</a> <br />
 
-                <p style="margin-top: 1rem;">
+                <p class="contact-info" style="margin-top: 1rem;">
                     <b>Office:</b> PQ 503, PQ Wing, PolyU, Hung Hom, Hong Kong.<br />
                     <b>Email:</b>
                     <span
@@ -338,31 +372,26 @@
                         xiang-chun.chen AT connect.polyu.hk
                     </span>
                     <br />
-                    <a href="https://scholar.google.com.hk/citations?user=WtxyVYMAAAAJ&hl=zh-CN"><b>Google
+                    <a href="https://scholar.google.com.hk/citations?user=WtxyVYMAAAAJ&amp;hl=zh-CN"><b>Google
                             Scholar</b></a> |
                     <a href=" "><b>My Full CV</b></a>
                 </p>
             </div>
         </div>
         <h2>Short Bio</h2>
-        <p align="justify"> Xiangchun Chen is a PhD candidate (Expected Ph.D. in 2026) in <a
-                href="https://www.polyu.edu.hk/comp/"> Department of Computing, <a href="https://www.polyu.edu.hk/">
-                    The Hong Kong Polytechnic University </a>,
-                supervised by <a href="http://www4.comp.polyu.edu.hk/~csjcao/"><b>Prof. Jiannong Cao (IEEE Fellow,
-                        Vice President of PolyU)</b></a>.
-                Previously, he received the Bachelor Degree of Computer Science and Technology from
-                <a href="http://www.cs.hit.edu.cn/?q=node/201">Faculty of Computing</a>, <a
-                    href="https://www.hit.edu.cn/">Harbin Institute of
-                    Technology </a> in 2021.
+        <p style="text-align: justify;">Xiangchun Chen is a PhD candidate (Expected Ph.D. in 2026) in <a
+                href="https://www.polyu.edu.hk/comp/">Department of Computing</a>, <a
+                href="https://www.polyu.edu.hk/">The Hong Kong Polytechnic University</a>, supervised by <a
+                href="http://www4.comp.polyu.edu.hk/~csjcao/"><b>Prof. Jiannong Cao (IEEE Fellow, Vice President of
+                    PolyU)</b></a>. Previously, he received the Bachelor Degree of Computer Science and Technology from
+            <a href="http://www.cs.hit.edu.cn/?q=node/201">Faculty of Computing</a>, <a
+                href="https://www.hit.edu.cn/">Harbin Institute of Technology</a> in 2021.</p>
 
-                <p align="justify"> His research interests include Edge AI,Edge Computing, Digital Twin, Reinforcement
-                    Learning,
-                    Edge Large Language Model Inference, and Edge AI Agent. </p>
-
-        </p>
+        <p style="text-align: justify;">His research interests include Edge AI,Edge Computing, Digital Twin,
+            Reinforcement Learning, Edge Large Language Model Inference, and Edge AI Agent.</p>
 
         <div id="ai-chat-widget">
-            <div id="chat-header" onclick="toggleChat()">
+            <div id="chat-header" role="button" tabindex="0" aria-expanded="false">
                 <div class="mascot-3d">
                     <img src="./imgs/usagi.gif" alt="3D Usagi" />
                 </div>
@@ -373,43 +402,35 @@
                     <div class="msg msg-ai">Hello! I'm Xiangchun's AI Assistant. 🐰<br>Ask me about his research!</div>
                 </div>
                 <div id="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Ask something..." onkeypress="handleEnter(event)">
-                    <button id="chat-btn" onclick="sendMessage()">Send</button>
+                    <input type="text" id="chat-input" placeholder="Ask something..."
+                        aria-label="Ask Xiangchun Chen's AI assistant a question">
+                    <button id="chat-btn" type="button">Send</button>
                 </div>
             </div>
         </div>
         <h2 id="education">Education Background</h2>
         <ul>
-            <P>
-                <li>
-                    <font style="color:#527bbd;"><b>Ph.D.:</b> </font>&nbsp Hong
-                    Kong Polytechnic University, Hong
-                    Kong, China. 2021 - 2026
-                    <span class="supervisor-line">Supervisor: <a href="https://www4.comp.polyu.edu.hk/~csjcao/">
-                            <font style="color:#527bbd;"><b>Prof. Jiannong Cao, IEEE Fellow, Vice President of PolyU</b>
-                            </font>
-                        </a></span>
-                </li>
-            </P>
+            <li>
+                <font style="color:#527bbd;"><b>Ph.D.:</b></font>&nbsp; Hong Kong Polytechnic University, Hong Kong,
+                China. 2021 - 2026
+                <span class="supervisor-line">Supervisor: <a href="https://www4.comp.polyu.edu.hk/~csjcao/">
+                        <font style="color:#527bbd;"><b>Prof. Jiannong Cao, IEEE Fellow, Vice President of PolyU</b>
+                        </font>
+                    </a></span>
+            </li>
 
-            <P>
-                <li>
-                    <font style="color:#527bbd;"><b>Visiting Scholar:</b> </font>
-                    &nbsp National Institute of
-                    Informatics, Tokyo, Japan. 2024 - 2025
-                    <span class="supervisor-line">Supervisor: <a href="https://researchmap.jp/keiusei?lang=en">
-                            <font style="color:#527bbd;"><b>Prof. Yusheng Ji, IEEE Fellow</b></font>
-                        </a></span>
-                </li>
-            </P>
+            <li>
+                <font style="color:#527bbd;"><b>Visiting Scholar:</b></font>&nbsp; National Institute of Informatics,
+                Tokyo, Japan. 2024 - 2025
+                <span class="supervisor-line">Supervisor: <a href="https://researchmap.jp/keiusei?lang=en">
+                        <font style="color:#527bbd;"><b>Prof. Yusheng Ji, IEEE Fellow</b></font>
+                    </a></span>
+            </li>
 
-            <P>
-                <li>
-                    <font style="color:#527bbd;"><b>B.E.:</b><a href="https://www.hit.edu.cn/"> </a></font>&nbsp Harbin
-                    Institute of Technology, Harbin,
-                    China. 2017 - 2021 <br>
-                </li>
-            </P>
+            <li>
+                <font style="color:#527bbd;"><b>B.E.:</b></font>&nbsp; Harbin Institute of Technology, Harbin, China.
+                2017 - 2021 <br>
+            </li>
         </ul>
 
         <h2 id="publications">Publications</h2>
@@ -418,14 +439,14 @@
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[TMC]</font></b>&nbsp <a
+                    <font style="color:#527bbd;"><b>[TMC]</b></font>&nbsp; <a
                         href="https://ieeexplore.ieee.org/document/11224639" target="_blank">
                         Decentralized Task Offloading in Collaborative Edge Computing: A Digital Twin assisted
                         Multi-agent Reinforcement Learning Approach</a>, <br />
                     <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Rui Cao, Yuvraj Sahni, Mingjin Zhang, and Yusheng Ji.
                     <br />
                     in IEEE Transactions on Mobile Computing, 2025.<br />
-                    (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail"
+                    (<a href="https://www.letpub.com.cn/index.php?journalid=3403&amp;page=journalapp&amp;view=detail"
                         target="_blank"><b>CCF A, SCI I, JCR Q1</b></a>).<br />
                 </p>
             </li>
@@ -433,14 +454,14 @@
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[TMC]</font></b>&nbsp <a
+                    <font style="color:#527bbd;"><b>[TMC]</b></font>&nbsp; <a
                         href="https://ieeexplore.ieee.org/abstract/document/10767295" target="_blank">
                         Mobility-aware Dependent Task Offloading in Edge Computing: A Digital Twin-assisted
                         Reinforcement Learning Approach</a>, <br />
                     <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Mingjin Zhang, Zhixuan Liang, and Lei
                     Yang. <br />
                     in IEEE Transactions on Mobile Computing, 2024.<br />
-                    (<a href="https://www.letpub.com.cn/index.php?journalid=3403&page=journalapp&view=detail"
+                    (<a href="https://www.letpub.com.cn/index.php?journalid=3403&amp;page=journalapp&amp;view=detail"
                         target="_blank"><b>CCF A, SCI I, JCR Q1</b></a>).<br />
                 </p>
             </li>
@@ -448,13 +469,13 @@
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[TCC]</font></b>&nbsp <a href="https://ieeexplore.ieee.org/document/10480253
-" target="_blank">
+                    <font style="color:#527bbd;"><b>[TCC]</b></font>&nbsp; <a
+                        href="https://ieeexplore.ieee.org/document/10480253" target="_blank">
                         Dynamic Task Offloading in Edge Computing based on Dependency-aware Reinforcement Learning</a>,
                     <br />
                     <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Shan Jiang, and Zhixuan Liang. <br />
                     in IEEE Transactions on Cloud Computing, 2024.<br />
-                    (<a href="https://www.letpub.com.cn/index.php?journalid=10347&page=journalapp&view=detail"
+                    (<a href="https://www.letpub.com.cn/index.php?journalid=10347&amp;page=journalapp&amp;view=detail"
                         target="_blank"><b>IEEE Transactions on Cloud Computing Best Paper Award 2024, CCF B, SCI II,
                             JCR
                             Q1</b></a>).<br />
@@ -465,7 +486,7 @@
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[MASS]</font></b>&nbsp <a
+                    <font style="color:#527bbd;"><b>[MASS]</b></font>&nbsp; <a
                         href="https://doi.org/10.1109/MASS58611.2023.00012" target="_blank">
                         Digital Twin-assisted Reinforcement Learning for Dynamic Microservice Offloading in Edge
                         Computing</a>, <br />
@@ -479,7 +500,7 @@
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[ICNC]</font></b>&nbsp <a
+                    <font style="color:#527bbd;"><b>[ICNC]</b></font>&nbsp; <a
                         href="https://doi.org/10.1109/ICNC59896.2024.10556386" target="_blank">
                         Resource-efficient Parallel Split Learning in Heterogeneous Edge Computing </a>, <br />
                     Mingjin Zhang, Jiannong Cao, Yuvraj Sahni, <u><b>Xiangchun Chen</b></u>, and Shan Jiang. <br />
@@ -493,26 +514,24 @@
         <h2 id="teaching">Teaching Experience</h2>
 
         <ul>
-            <P>
-                <li>
-                    Teaching Assistant, Metaverse Applications: Design And Case Studies, Spring 2024.
-                </li>
-                <li>
-                    Teaching Assistant, Programming Fundamentals and Applications, Fall 2023.
-                </li>
-                <li>
-                    Teaching Assistant, Computer Networking, Spring 2023.
-                </li>
-                <li>
-                    Teaching Assistant, Programming Fundamentals and Applications, Fall 2022.
-                </li>
-                <li>
-                    Teaching Assistant, Programming Fundamentals, Spring 2022.
-                </li>
-                <li>
-                    Teaching Assistant, Computer Programming, Fall 2021.
-                </li>
-            </P>
+            <li>
+                Teaching Assistant, Metaverse Applications: Design And Case Studies, Spring 2024.
+            </li>
+            <li>
+                Teaching Assistant, Programming Fundamentals and Applications, Fall 2023.
+            </li>
+            <li>
+                Teaching Assistant, Computer Networking, Spring 2023.
+            </li>
+            <li>
+                Teaching Assistant, Programming Fundamentals and Applications, Fall 2022.
+            </li>
+            <li>
+                Teaching Assistant, Programming Fundamentals, Spring 2022.
+            </li>
+            <li>
+                Teaching Assistant, Computer Programming, Fall 2021.
+            </li>
         </ul>
 
         <h2>Academic Service</h2>
@@ -552,12 +571,10 @@
         <h2>Work Experience</h2>
 
         <ul>
-            <P>
-                <li>
-                    Software Engineer Intern, Ant Group (formerly Ant Financial Services Group; affiliate of Alibaba
-                    Group), Chengdu, China. 2020.
-                </li>
-            </P>
+            <li>
+                Software Engineer Intern, Ant Group (formerly Ant Financial Services Group; affiliate of Alibaba
+                Group), Chengdu, China. 2020.
+            </li>
         </ul>
 
 
@@ -571,31 +588,21 @@
 
         <h2>News</h2>
         <ul>
-            <P>
-                <li>
-                    [10/2025] Congratulations! Our paper, "Reliability-aware Task Offloading in Decentralized Edge
-                    Computing: A Digital Twin assisted Multi-agent Reinforcement Learning Approach.", has been accepted
-                    at IEEE Transactions on Mobile Computing！
-                </li>
-            </P>
-        </ul>
-        <ul>
-            <P>
-                <li>
-                    [08/2025] Congratulations! Our paper, "Dynamic Task Offloading in EdgeComputing Based on
-                    Dependency-AwareReinforcement Learning", has been selected as the Winner of the 2024 Best Paper
-                    Award, from lEEE Transactions on Cloud Computing by the lEEE ComputerSociety Publications Board！
-                </li>
-            </P>
-        </ul>
-        <ul>
-            <P>
-                <li>
-                    [11/2024] Congratulations! Our paper "Mobility-aware Dependent Task Offloading in Edge Computing: A
-                    Digital Twin-assisted Reinforcement Learning Approach" has been accepted at IEEE Transactions on
-                    Mobile Computing！
-                </li>
-            </P>
+            <li>
+                [10/2025] Congratulations! Our paper, "Reliability-aware Task Offloading in Decentralized Edge
+                Computing: A Digital Twin assisted Multi-agent Reinforcement Learning Approach.", has been accepted
+                at IEEE Transactions on Mobile Computing！
+            </li>
+            <li>
+                [08/2025] Congratulations! Our paper, "Dynamic Task Offloading in EdgeComputing Based on
+                Dependency-AwareReinforcement Learning", has been selected as the Winner of the 2024 Best Paper
+                Award, from lEEE Transactions on Cloud Computing by the lEEE ComputerSociety Publications Board！
+            </li>
+            <li>
+                [11/2024] Congratulations! Our paper "Mobility-aware Dependent Task Offloading in Edge Computing: A
+                Digital Twin-assisted Reinforcement Learning Approach" has been accepted at IEEE Transactions on
+                Mobile Computing！
+            </li>
         </ul>
     </div>
     <script>
@@ -603,36 +610,50 @@
 
         function toggleChat() {
             const content = document.getElementById('chat-content');
-            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+            const header = document.getElementById('chat-header');
+            const isHidden = window.getComputedStyle(content).display === 'none';
+            content.style.display = isHidden ? 'block' : 'none';
+            header.setAttribute('aria-expanded', String(isHidden));
         }
 
-        function handleEnter(e) { if (e.key === 'Enter') sendMessage(); }
+        function appendChatMessage(type, text) {
+            const history = document.getElementById('chat-history');
+            const message = document.createElement('div');
+            message.className = `msg ${type}`;
+            message.textContent = text;
+            history.appendChild(message);
+            history.scrollTop = history.scrollHeight;
+            return message;
+        }
 
         async function sendMessage() {
             const input = document.getElementById('chat-input');
             const history = document.getElementById('chat-history');
+            const button = document.getElementById('chat-btn');
             const question = input.value.trim();
             if (!question) return;
 
-            // 显示用户提问
-            history.innerHTML += `<div class="msg-user">You: ${question}</div>`;
+            appendChatMessage('msg-user', `You: ${question}`);
             input.value = '';
-            history.scrollTop = history.scrollHeight;
+            button.disabled = true;
+            const thinkingMessage = appendChatMessage('msg-ai', 'Thinking...');
 
             try {
-                history.innerHTML += `<div class="msg-ai">Thinking...</div>`;
                 const res = await fetch(WORKER_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ question: question })
                 });
+                if (!res.ok) {
+                    throw new Error(`Request failed with status ${res.status}`);
+                }
                 const data = await res.json();
-
-                // 移除 "Thinking..." 并显示回答
-                history.lastElementChild.remove();
-                history.innerHTML += `<div class="msg-ai">AI: ${data.response}</div>`;
+                const responseText = typeof data.response === 'string' ? data.response : 'No response returned.';
+                thinkingMessage.textContent = `AI: ${responseText}`;
             } catch (err) {
-                history.lastElementChild.innerText = "Error connecting to AI.";
+                thinkingMessage.textContent = 'Error connecting to AI.';
+            } finally {
+                button.disabled = false;
             }
             history.scrollTop = history.scrollHeight;
         }
@@ -650,6 +671,40 @@
 
         // Add class to publications for visual effects
         window.addEventListener('DOMContentLoaded', function () {
+            const chatHeader = document.getElementById('chat-header');
+            const chatInput = document.getElementById('chat-input');
+            const chatButton = document.getElementById('chat-btn');
+
+            if (chatHeader) {
+                chatHeader.addEventListener('click', toggleChat);
+                chatHeader.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        toggleChat();
+                    }
+                });
+            }
+
+            if (chatInput) {
+                chatInput.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        sendMessage();
+                    }
+                });
+            }
+
+            if (chatButton) {
+                chatButton.addEventListener('click', sendMessage);
+            }
+
+            document.querySelectorAll('a[target="_blank"]').forEach(function (link) {
+                const relParts = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+                relParts.add('noopener');
+                relParts.add('noreferrer');
+                link.setAttribute('rel', Array.from(relParts).join(' '));
+            });
+
             // Add publication item class to li elements in publications section
             const publicationLis = document.querySelectorAll('#publications li');
             publicationLis.forEach(li => {
