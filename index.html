@@ -32,6 +32,40 @@
             margin-top: 0.4em;
         }
 
+        .nav-shell {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-copy {
+            flex: 1;
+            min-width: 0;
+        }
+
         #ai-chat-widget {
             position: fixed;
             bottom: 30px;
@@ -200,16 +234,40 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
             gap: 2rem;
             margin: 1.5rem 0;
         }
 
         .sponsor-logos img {
             display: block;
-            height: 100px;
+            height: auto;
+            max-height: 100px;
+            max-width: 100%;
         }
 
         /* Additional CSS for enhanced styling */
+        html {
+            scroll-padding-top: 110px;
+        }
+
+        #layout-content,
+        #layout-content * {
+            box-sizing: border-box;
+        }
+
+        #layout-content a,
+        #layout-content p,
+        #layout-content li,
+        #layout-content span {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        h2[id] {
+            scroll-margin-top: 110px;
+        }
+
         #layout-content>* {
             animation: fadeInUp 0.6s ease forwards;
             opacity: 0;
@@ -268,28 +326,83 @@
 
         /* Responsive navigation */
         @media (max-width: 768px) {
+            body {
+                padding-top: 118px;
+            }
+
             nav {
-                padding: 1rem;
+                padding: 1rem !important;
             }
 
-            nav div:last-child {
-                gap: 1rem;
+            .nav-shell {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
             }
 
-            nav a {
-                font-size: 0.9rem;
+            .nav-brand {
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 0.75rem 1rem;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-copy {
+                width: 100%;
+            }
+
+            .hero-copy h1,
+            .hero-copy>p:first-of-type,
+            .hero-copy>a {
+                text-align: center;
+            }
+
+            .hero-copy>a {
+                display: block;
+                margin-bottom: 0.25rem;
+            }
+
+            .contact-info {
+                text-align: left;
+            }
+
+            .sponsor-logos {
+                gap: 1rem 1.25rem;
+            }
+
+            .sponsor-logos img {
+                max-height: 72px;
             }
         }
 
         @media (max-width: 480px) {
-            nav {
-                padding: 0.8rem;
+            html {
+                scroll-padding-top: 148px;
             }
 
-            nav div:last-child {
-                gap: 0.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            body {
+                padding-top: 148px;
+            }
+
+            h2[id] {
+                scroll-margin-top: 148px;
+            }
+
+            nav {
+                padding: 0.8rem !important;
+            }
+
+            .nav-links {
+                gap: 0.5rem 0.75rem;
             }
 
             nav a {
@@ -298,9 +411,10 @@
             }
 
             #ai-chat-widget {
+                left: 12px;
                 right: 12px;
                 bottom: 12px;
-                width: calc(100vw - 24px);
+                width: auto;
             }
 
             #chat-content {
@@ -315,6 +429,10 @@
 
             .header-title {
                 margin-left: 60px;
+            }
+
+            .sponsor-logos img {
+                max-height: 60px;
             }
         }
 
@@ -334,12 +452,11 @@
 
 <body>
     <div id="layout-content">
-        <nav
+        <nav id="site-nav"
             style="position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
-            <div
-                style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                <div style="font-weight: 600; color: var(--primary-color);">Xiangchun Chen</div>
-                <div style="display: flex; gap: 2rem;">
+            <div class="nav-shell">
+                <div class="nav-brand">Xiangchun Chen</div>
+                <div class="nav-links">
                     <a href="#education">Education</a>
                     <a href="#publications">Publications</a>
                     <a href="#teaching">Teaching</a>
@@ -351,9 +468,9 @@
                 </div>
             </div>
         </nav>
-        <div style="display: flex; align-items: center; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap;">
+        <div class="hero-section">
             <img src="./imgs/xiangchunchen.jpg" alt="Xiangchun Chen" />
-            <div style="flex: 1;">
+            <div class="hero-copy">
                 <h1>Xiangchun Chen</h1>
                 <p style="font-size: 1.2rem; font-weight: 500; color: var(--secondary-color); margin-bottom: 0.5rem;">
                     <b>Expected Ph.D. (2026)</b>

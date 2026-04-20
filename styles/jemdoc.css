@@ -170,14 +170,6 @@ li:hover {
   box-shadow: 0 4px 12px var(--shadow-color);
 }
 
-li::before {
-  content: '→';
-  position: absolute;
-  left: 0.5rem;
-  color: var(--accent-color);
-  font-weight: bold;
-}
-
 /* Publication items */
 li:has(font[style*="color:#527bbd"]) {
   border-left-color: #527bbd;
