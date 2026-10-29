@@ -1,0 +1,35 @@
+name: Sync homepage to Hugging Face
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: huggingface-homepage
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Prepare website and Space metadata
+        run: |
+          mkdir -p "$RUNNER_TEMP/homepage"
+          cp ./*.html "$RUNNER_TEMP/homepage/"
+          cp -R assets demos styles "$RUNNER_TEMP/homepage/"
+          echo '---' > "$RUNNER_TEMP/homepage/README.md"
+          echo 'title: Xiangchun Chen' >> "$RUNNER_TEMP/homepage/README.md"
+          echo 'emoji: 📚' >> "$RUNNER_TEMP/homepage/README.md"
+          echo 'colorFrom: blue' >> "$RUNNER_TEMP/homepage/README.md"
+          echo 'colorTo: gray' >> "$RUNNER_TEMP/homepage/README.md"
+          echo 'sdk: static' >> "$RUNNER_TEMP/homepage/README.md"
+          echo 'app_file: index.html' >> "$RUNNER_TEMP/homepage/README.md"
+          echo '---' >> "$RUNNER_TEMP/homepage/README.md"
+      - name: Install Hugging Face CLI
+        run: python -m pip install 'huggingface_hub[cli]>=1.19.0'
+      - name: Publish website
+        env:
+          HF_OIDC_RESOURCE: spaces/XiangchunChen/homepage
+        run: hf upload XiangchunChen/homepage "$RUNNER_TEMP/homepage" . --repo-type space --commit-message "Sync GitHub $GITHUB_SHA"
