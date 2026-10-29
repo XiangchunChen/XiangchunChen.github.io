@@ -17,8 +17,7 @@ jobs:
       - name: Prepare website and Space metadata
         run: |
           mkdir -p "$RUNNER_TEMP/homepage"
-          cp ./*.html "$RUNNER_TEMP/homepage/"
-          cp -R assets demos styles "$RUNNER_TEMP/homepage/"
+          rsync -a --exclude='/.git/' --exclude='/.github/' --exclude='/.chrome-headless/' --exclude='/.edge-headless/' --exclude='/AGENTS.md' --exclude='/README.md' ./ "$RUNNER_TEMP/homepage/"
           echo '---' > "$RUNNER_TEMP/homepage/README.md"
           echo 'title: Xiangchun Chen' >> "$RUNNER_TEMP/homepage/README.md"
           echo 'emoji: 📚' >> "$RUNNER_TEMP/homepage/README.md"
