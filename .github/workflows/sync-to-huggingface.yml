@@ -31,4 +31,28 @@ jobs:
       - name: Publish website
         env:
           HF_OIDC_RESOURCE: spaces/XiangchunChen/homepage
-        run: hf upload XiangchunChen/homepage "$RUNNER_TEMP/homepage" . --repo-type space --commit-message "Sync GitHub $GITHUB_SHA"
+        shell: python
+        run: |
+          import json
+          import os
+          import subprocess
+          from glob import escape
+          from pathlib import Path
+          from huggingface_hub import hf_hub_download
+          from huggingface_hub.errors import RemoteEntryNotFoundError
+
+          repo = "XiangchunChen/homepage"
+          site = Path(os.environ["RUNNER_TEMP"]) / "homepage"
+          manifest = ".hf-sync-files.json"
+          current = {p.relative_to(site).as_posix() for p in site.rglob("*") if p.is_file()}
+          try:
+              previous = json.loads(Path(hf_hub_download(repo, manifest, repo_type="space")).read_text())
+          except RemoteEntryNotFoundError:
+              previous = []  # First run records the baseline without deleting Space-only files.
+          (site / manifest).write_text(json.dumps(sorted(current)) + "\n")
+          deleted = sorted(set(previous) - current)
+          subprocess.run([
+              "hf", "upload", repo, str(site), ".", "--repo-type", "space",
+              "--commit-message", "Sync GitHub " + os.environ["GITHUB_SHA"],
+              *["--delete=" + escape(path) for path in deleted],
+          ], check=True)
