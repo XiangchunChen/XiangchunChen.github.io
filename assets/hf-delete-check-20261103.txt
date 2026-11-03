@@ -1,0 +1,1 @@
+Temporary verification file for GitHub to Hugging Face deletion sync.
