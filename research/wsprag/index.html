@@ -39,19 +39,52 @@
   <header>
     <p class="kicker">Research note · November 2026</p>
     <h1>Can Retrieved Editing Experience Transfer Across Neural Checkpoints?</h1>
+    <p class="meta">A Controlled Tiny-Network Study</p>
     <p class="meta"><strong>Xiangchun Chen</strong> · The Hong Kong Polytechnic University</p>
+    <p class="meta">A controlled tiny-network study · Preprint, not peer reviewed</p>
+    <p class="links"><a href="#results">Results</a><a href="#references">References</a></p>
   </header>
+  <section class="summary" aria-labelledby="summary-title">
+    <h2 id="summary-title">In brief</h2>
+    <p>Can a language-model editor repair a new network more effectively when it can read previous editing attempts? In this small controlled study, <strong>we did not find evidence that relevant retrieval reliably beat both controls</strong>.</p>
+    <p>Across 12 held-out checkpoints, the mean difference was +0.114 percentage points versus no experience and +0.024 points versus random experience; the joint test yielded <em>p</em> = 0.5. Only one checkpoint favored relevant retrieval over both controls. The result is <strong>inconclusive</strong>: the benchmark has only three synthetic task families and sparse nonzero outcomes.</p>
+  </section>
   <section>
     <h2>The question</h2>
-    <p>Weight-space programming explores whether language models can reason about and directly edit neural network weights. A related question is whether an editor can use previous experience to help with a new checkpoint.</p>
-    <p>This research note introduces the question and related work. Detailed results and research materials are withheld before publication.</p>
+    <p>Recent weight-space programming work asks whether language models can reason about and directly edit neural weights. We ask a follow-up question: if an editor keeps records of earlier attempts, can selecting related records help it edit a new checkpoint? A relevant record might offer a useful idea; it might also copy an edit that works only for its source. Random examples help separate useful selection from the benefit of merely seeing examples.</p>
+    <p>Our target networks are tiny classifiers. We do not edit language-model weights, and this experiment cannot establish how the approach performs on language models or different architectures.</p>
   </section>
   <section>
-    <h2>Why compare experience?</h2>
-    <p>Previous attempts might offer useful ideas, but an edit that works for one model need not transfer to another. Comparing relevant examples with random examples and no examples can help distinguish selection from simply providing examples.</p>
-    <p>Any conclusions depend on the tasks, models, editing procedure, and evaluation used. Results from a small study should not be assumed to generalize to other settings.</p>
+    <h2>What we tested</h2>
+    <div class="flow">
+      <div><strong>1 · Build a library</strong>12 independently trained source checkpoints; four yielded verified, nonempty positive edits. Unsuccessful records remained available.</div>
+      <div><strong>2 · Choose experience</strong>Each new checkpoint receives no record, two random records, or two records selected by task similarity and weight statistics.</div>
+      <div><strong>3 · Evaluate once</strong>The same editor proposes at most eight sparse additions. A separate evaluator applies the acceptance and regional guard checks before final testing.</div>
+    </div>
+    <p>The confirmation set contains 12 new checkpoints and two proposals per condition and checkpoint. Each final test has 512 points, but the <em>checkpoint</em> is the independent unit. Invalid or rejected proposals count as the unchanged baseline. The guard set is a separate input region of the same classification task, not a separate retained capability.</p>
+  </section>
+  <section id="results">
+    <h2>What happened?</h2>
+    <p>Relevant retrieval did not meet the prespecified requirement of a five-point advantage over both controls, nor the requirement that most checkpoints favor it. The table shows held-out confirmation results; final accuracy is averaged over the two proposals for each checkpoint.</p>
+    <div class="table-wrap"><table>
+      <caption class="small">Confirmation: 12 checkpoints, 24 proposals per condition</caption>
+      <thead><tr><th scope="col">Condition</th><th scope="col">Final accuracy</th><th scope="col">Gain over baseline</th><th scope="col">Accepted proposals</th></tr></thead>
+      <tbody><tr><th scope="row">No experience</th><td>70.972%</td><td>+0.106 pp</td><td>8 / 24</td></tr><tr><th scope="row">Random experience</th><td>71.061%</td><td>+0.195 pp</td><td>9 / 24</td></tr><tr><th scope="row">Relevant experience</th><td>71.086%</td><td>+0.220 pp</td><td>11 / 24</td></tr></tbody>
+    </table></div>
+    <figure><div class="chart-scroll" tabindex="0" role="region" aria-label="Confirmation chart, scroll horizontally on narrow screens"><img src="../../assets/research/wsprag/confirm-targets.svg" alt="Two dot plots show the difference in repair gain for each of twelve confirmation checkpoints. Most differences are zero; only one checkpoint favors relevant retrieval against both controls."></div><figcaption>Each point is one checkpoint; the dashed line is the mean difference. Positive values favor relevant retrieval. Source: confirmation results.</figcaption></figure>
+    <p>Relevant minus no experience was +0.114 pp (nominal 95% bootstrap interval: 0.000 to 0.293 pp); relevant minus random was +0.024 pp (−0.114 to 0.203 pp). With 12 checkpoints and many ties, bootstrap intervals are fragile. A near-zero lower endpoint is not evidence that harm is impossible, and the sign-flip test requires a symmetry assumption.</p>
   </section>
   <section>
+    <h2>Could we just carry the edit over?</h2>
+    <p>We also compared three approaches: copy a validated source weight difference, re-execute its RMS-scaled program on the new checkpoint, or ask the editor for a new proposal after retrieval. Their mean confirmation gains were +1.628, +0.749, and +0.220 pp, respectively, after the same acceptance gate. The first two passed the gate on 4 of 12 checkpoints each.</p>
+    <p>This is a descriptive mechanism check. The source used for direct transfer need not be one of the two records shown to the editor, so the comparison is not source-matched and cannot establish why the numbers differ.</p>
+  </section>
+  <section>
+    <h2>Scope and reproducibility</h2>
+    <p>We used one editor service, one architecture, three synthetic task families and a small number of independently initialized checkpoints. Confirmation parameters were held out, but the confirmation implementation was frozen after screen proposals had begun and before screen final labels were opened. We also reopened references from the original plan during screen collection. Neither action changed the frozen retrieval inputs or method; both are documented as limitations.</p>
+    <p>The editor was accessed through an external model service; an immutable model revision was unavailable. AI assistants helped implement, review and write up the study; independent reviewers replayed the recorded results. The paper, research code, and reproducibility data are not yet public.</p>
+  </section>
+  <section id="references">
     <h2>Related work</h2>
     <ol class="references">
       <li>Takehi et al. <a href="https://rikiyat.github.io/blog/weight-space-programming/">Sparks of Weight-Space Programming</a>, 2026.</li>
@@ -60,6 +93,7 @@
       <li>Kawamoto et al. <a href="https://arxiv.org/abs/2505.12021">Cross-Model Transfer of Task Vectors via Few-Shot Orthogonal Alignment</a>, 2025.</li>
       <li>Mitchell et al. <a href="https://proceedings.mlr.press/v162/mitchell22a.html">Memory-Based Model Editing at Scale</a>, ICML 2022.</li>
     </ol>
+    <p class="small">This page describes research in progress and is not a claim of conference submission or acceptance.</p>
   </section>
 </main>
 </body>
