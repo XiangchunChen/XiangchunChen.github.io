@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "scientific_scope": "restricted-WSP tiny MLP, not a language model",
+  "architecture": "2-16-2 ReLU float32",
+  "splits": {"archive": 24, "dev": 4, "screen": 8, "confirm": 12},
+  "seed_offsets": {"archive": 1000, "dev": 2000, "screen": 3000, "confirm": 4000},
+  "samples": {"train": 128, "support": 24, "accept": 128, "guard": 128, "final": 512},
+  "eligibility": [0.55, 0.90],
+  "patch": {"operator": "ADD", "max_scalars": 8, "coefficients": [-2, -1, -0.5, 0.5, 1, 2], "rms_floor": 0.01},
+  "arms": ["none", "random", "relevant"],
+  "top_k": 2,
+  "repeats": 2,
+  "editor": {"endpoint": "http://127.0.0.1:3425/v1/chat/completions", "request_model": "kiro/claude-haiku-4.5", "response_model": "claude-haiku-4.5", "max_tokens": 1024, "temperature": 0.7, "concurrency": 1},
+  "retrieval": {"method": "TF-IDF cosine plus RMS distance", "text_weight": 0.8, "rms_weight": 0.2, "selection": "fixed before screen"},
+  "acceptance": {"minimum_accept_gain": 0.0, "maximum_guard_drop": 0.10},
+  "primary": "intersection-union max(p relevant > none, p relevant > random), paired by target",
+  "screen_once": true,
+  "confirm_once": true,
+  "minimum_archive_valid": 4,
+  "change": "User revoked 12-hour project deadline on 2026-11-04; no shared scheduler deadline has been modified."
+}
