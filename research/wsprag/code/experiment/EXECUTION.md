@@ -1,7 +1,0 @@
-# Execution notes
-
-Target generation and editing run on CPU with one PyTorch thread. The frozen editor is `kiro/claude-haiku-4.5` through an existing local Magpie endpoint; its returned identifier is `claude-haiku-4.5`. A provider revision was not available. Original model inputs, responses, observed usage and failures are retained in `logs/raw_runs.jsonl`; no credential is stored by the experiment.
-
-Data generation and all scientific stages have different consequences. `core.py generate` must not be rerun after an archive exists. `runner.py archive` stops after 12 archive proposals if at least four are positive, otherwise extends in order to 24. The frozen archive is immutable. `screen.py` refuses restart once its marker, journal, or results exist. A partial or indeterminate request requires an explicit integrity assessment, not a fresh silent proposal. Final screen data can be opened only with `open_screen.py` after all expected proposals and hash checks succeed; it creates a one-time opening marker. Confirmation follows separately with `confirm.py` and `open_confirm.py` after screen analysis and independent review. The source does not provide automatic resumption of an interrupted screening or confirmation stage.
-
-Do not publish the manuscript until all reported results have been derived from actual raw data, independent QA is complete, and authorship and publication metadata are verified.
