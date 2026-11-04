@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A controlled study of whether retrieved editing experience transfers across tiny neural checkpoints.">
+  <title>Can Retrieved Editing Experience Transfer Across Neural Checkpoints? | Xiangchun Chen</title>
+  <link rel="stylesheet" href="../../styles/jemdoc.css">
+  <style>
+    body { background: #f8fafc; }
+    .research-page { max-width: 920px; margin: 2rem auto; padding: 2.5rem 3rem 3rem; background: #fff; color: #263544; }
+    .research-page h1 { color: #243d5c; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; margin: 1rem 0; }
+    .research-page h2 { font-size: 1.55rem; margin-top: 2.6rem; }
+    .research-page h3 { font-size: 1.15rem; }
+    .research-page p, .research-page li { line-height: 1.75; }
+    .kicker { color: #52677c; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; }
+    .meta, .small { color: #536477; font-size: .94rem; }
+    .links a { display: inline-block; margin: .25rem 1.2rem .25rem 0; font-weight: 600; }
+    .summary { border-left: 4px solid #527bbd; padding: .2rem 1.1rem; background: #f4f7fb; margin: 1.7rem 0; }
+    .summary p { margin: .6rem 0; }
+    .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+    .flow > div { border-top: 3px solid #527bbd; background: #f7f9fc; padding: 1rem; }
+    .flow strong { display: block; margin-bottom: .35rem; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    th, td { text-align: left; padding: .65rem .75rem; border-bottom: 1px solid #dbe4ee; }
+    th { color: #24486e; background: #f5f8fc; }
+    figure { margin: 1.8rem 0; }
+    figure img { display: block; width: 100%; height: auto; }
+    figcaption { color: #536477; font-size: .9rem; line-height: 1.6; }
+    .references li { margin-bottom: .65rem; overflow-wrap: anywhere; }
+    @media (max-width: 650px) { .research-page { margin: 0; padding: 1.4rem 1.2rem 2.5rem; } .flow { grid-template-columns: 1fr; } th,td { padding: .5rem; } }
+  </style>
+</head>
+<body>
+<main class="research-page">
+  <nav aria-label="Breadcrumb"><a href="../../index.html">← Xiangchun Chen</a> / Research</nav>
+  <header>
+    <p class="kicker">Research note · November 2026</p>
+    <h1>Can Retrieved Editing Experience Transfer Across Neural Checkpoints?</h1>
+    <p class="meta">A Controlled Tiny-Network Study</p>
+    <p class="meta"><strong>Xiangchun Chen</strong> · The Hong Kong Polytechnic University</p>
+    <p class="meta">A controlled tiny-network study · Preprint, not peer reviewed</p>
+    <p class="links"><a href="../../assets/research/wsprag/paper.pdf">Paper (PDF)</a><a href="../../assets/research/wsprag/reproducibility.zip">Code and evidence</a><a href="https://github.com/XiangchunChen/XiangchunChen.github.io/tree/main/research/wsprag/code">Browse source</a><a href="#results">Results</a><a href="#references">References</a></p>
+  </header>
+  <section class="summary" aria-labelledby="summary-title">
+    <h2 id="summary-title">In brief</h2>
+    <p>Can a language-model editor repair a new network more effectively when it can read previous editing attempts? In this small controlled study, <strong>we did not find evidence that relevant retrieval reliably beat both controls</strong>.</p>
+    <p>Across 12 held-out checkpoints, the mean difference was +0.114 percentage points versus no experience and +0.024 points versus random experience; the joint test yielded <em>p</em> = 0.5. Only one checkpoint favored relevant retrieval over both controls. The result is <strong>inconclusive</strong>: the benchmark has only three synthetic task families and sparse nonzero outcomes.</p>
+  </section>
+  <section>
+    <h2>The question</h2>
+    <p>Recent weight-space programming work asks whether language models can reason about and directly edit neural weights. We ask a follow-up question: if an editor keeps records of earlier attempts, can selecting related records help it edit a new checkpoint? A relevant record might offer a useful idea; it might also copy an edit that works only for its source. Random examples help separate useful selection from the benefit of merely seeing examples.</p>
+    <p>Our target networks are tiny classifiers. We do not edit language-model weights, and this experiment cannot establish how the approach performs on language models or different architectures.</p>
+  </section>
+  <section>
+    <h2>What we tested</h2>
+    <div class="flow">
+      <div><strong>1 · Build a library</strong>12 independently trained source checkpoints; four yielded verified, nonempty positive edits. Unsuccessful records remained available.</div>
+      <div><strong>2 · Choose experience</strong>Each new checkpoint receives no record, two random records, or two records selected by task similarity and weight statistics.</div>
+      <div><strong>3 · Evaluate once</strong>The same editor proposes at most eight sparse additions. A separate evaluator applies the acceptance and regional guard checks before final testing.</div>
+    </div>
+    <p>The confirmation set contains 12 new checkpoints and two proposals per condition and checkpoint. Each final test has 512 points, but the <em>checkpoint</em> is the independent unit. Invalid or rejected proposals count as the unchanged baseline. The guard set is a separate input region of the same classification task, not a separate retained capability.</p>
+  </section>
+  <section id="results">
+    <h2>What happened?</h2>
+    <p>Relevant retrieval did not meet the prespecified requirement of a five-point advantage over both controls, nor the requirement that most checkpoints favor it. The table shows held-out confirmation results; final accuracy is averaged over the two proposals for each checkpoint.</p>
+    <div class="table-wrap"><table>
+      <caption class="small">Confirmation: 12 checkpoints, 24 proposals per condition</caption>
+      <thead><tr><th scope="col">Condition</th><th scope="col">Final accuracy</th><th scope="col">Gain over baseline</th><th scope="col">Accepted proposals</th></tr></thead>
+      <tbody><tr><th scope="row">No experience</th><td>70.972%</td><td>+0.106 pp</td><td>8 / 24</td></tr><tr><th scope="row">Random experience</th><td>71.061%</td><td>+0.195 pp</td><td>9 / 24</td></tr><tr><th scope="row">Relevant experience</th><td>71.086%</td><td>+0.220 pp</td><td>11 / 24</td></tr></tbody>
+    </table></div>
+    <figure><img src="../../assets/research/wsprag/confirm-targets.svg" alt="Two dot plots show the difference in repair gain for each of twelve confirmation checkpoints. Most differences are zero; only one checkpoint favors relevant retrieval against both controls."><figcaption>Each point is one checkpoint; the dashed line is the mean difference. Positive values favor relevant retrieval. Source: frozen confirmation summary in the linked code and evidence package.</figcaption></figure>
+    <p>Relevant minus no experience was +0.114 pp (nominal 95% bootstrap interval: 0.000 to 0.293 pp); relevant minus random was +0.024 pp (−0.114 to 0.203 pp). With 12 checkpoints and many ties, bootstrap intervals are fragile. A near-zero lower endpoint is not evidence that harm is impossible, and the sign-flip test requires a symmetry assumption.</p>
+  </section>
+  <section>
+    <h2>Could we just carry the edit over?</h2>
+    <p>We also compared three approaches: copy a validated source weight difference, re-execute its RMS-scaled program on the new checkpoint, or ask the editor for a new proposal after retrieval. Their mean confirmation gains were +1.628, +0.749, and +0.220 pp, respectively, after the same acceptance gate. The first two passed the gate on 4 of 12 checkpoints each.</p>
+    <p>This is a descriptive mechanism check. The source used for direct transfer need not be one of the two records shown to the editor, so the comparison is not source-matched and cannot establish why the numbers differ.</p>
+  </section>
+  <section>
+    <h2>Scope and reproducibility</h2>
+    <p>We used one editor service, one architecture, three synthetic task families and a small number of independently initialized checkpoints. Confirmation parameters were held out, but the confirmation implementation was frozen after screen proposals had begun and before screen final labels were opened. We also reopened references from the original plan during screen collection. Neither action changed the frozen retrieval inputs or method; both are documented as limitations.</p>
+    <p>The provider did not expose an immutable model revision. The package contains frozen configuration, source code, generated data, model responses, failed attempts and independent replay instructions. The study recorded 155 experimental API calls plus two connectivity checks; billing was not exposed. Target computation ran on CPU and did not use a GPU. AI assistants helped implement, review and write up the study; independent Codex subagents replayed the recorded results.</p>
+  </section>
+  <section id="references">
+    <h2>Related work</h2>
+    <ol class="references">
+      <li>Takehi et al. <a href="https://rikiyat.github.io/blog/weight-space-programming/">Sparks of Weight-Space Programming</a>, 2026.</li>
+      <li>Wang et al. <a href="https://voyager.minedojo.org/">Voyager: An Open-Ended Embodied Agent with Large Language Models</a>, 2023.</li>
+      <li>Ilharco et al. <a href="https://arxiv.org/abs/2212.04089">Editing Models with Task Arithmetic</a>, ICLR 2023.</li>
+      <li>Kawamoto et al. <a href="https://arxiv.org/abs/2505.12021">Cross-Model Transfer of Task Vectors via Few-Shot Orthogonal Alignment</a>, 2025.</li>
+      <li>Mitchell et al. <a href="https://proceedings.mlr.press/v162/mitchell22a.html">Memory-Based Model Editing at Scale</a>, ICML 2022.</li>
+    </ol>
+    <p class="small">The paper is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. This page summarizes a preprint and is not a claim of conference submission or acceptance. The paper includes the complete protocol, uncertainty estimates and limitations.</p>
+  </section>
+</main>
+</body>
+</html>
