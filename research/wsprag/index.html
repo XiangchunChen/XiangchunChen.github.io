@@ -26,7 +26,8 @@
     th, td { text-align: left; padding: .65rem .75rem; border-bottom: 1px solid #dbe4ee; }
     th { color: #24486e; background: #f5f8fc; }
     figure { margin: 1.8rem 0; }
-    figure img { display: block; width: 100%; height: auto; }
+    .chart-scroll { overflow-x: auto; }
+    figure img { display: block; width: 100%; min-width: 650px; height: auto; }
     figcaption { color: #536477; font-size: .9rem; line-height: 1.6; }
     .references li { margin-bottom: .65rem; overflow-wrap: anywhere; }
     @media (max-width: 650px) { .research-page { margin: 0; padding: 1.4rem 1.2rem 2.5rem; } .flow { grid-template-columns: 1fr; } th,td { padding: .5rem; } }
@@ -70,7 +71,7 @@
       <thead><tr><th scope="col">Condition</th><th scope="col">Final accuracy</th><th scope="col">Gain over baseline</th><th scope="col">Accepted proposals</th></tr></thead>
       <tbody><tr><th scope="row">No experience</th><td>70.972%</td><td>+0.106 pp</td><td>8 / 24</td></tr><tr><th scope="row">Random experience</th><td>71.061%</td><td>+0.195 pp</td><td>9 / 24</td></tr><tr><th scope="row">Relevant experience</th><td>71.086%</td><td>+0.220 pp</td><td>11 / 24</td></tr></tbody>
     </table></div>
-    <figure><img src="../../assets/research/wsprag/confirm-targets.svg" alt="Two dot plots show the difference in repair gain for each of twelve confirmation checkpoints. Most differences are zero; only one checkpoint favors relevant retrieval against both controls."><figcaption>Each point is one checkpoint; the dashed line is the mean difference. Positive values favor relevant retrieval. Source: frozen confirmation summary in the linked code and evidence package.</figcaption></figure>
+    <figure><div class="chart-scroll" tabindex="0" role="region" aria-label="Confirmation chart, scroll horizontally on narrow screens"><img src="../../assets/research/wsprag/confirm-targets.svg" alt="Two dot plots show the difference in repair gain for each of twelve confirmation checkpoints. Most differences are zero; only one checkpoint favors relevant retrieval against both controls."></div><figcaption>Each point is one checkpoint; the dashed line is the mean difference. Positive values favor relevant retrieval. Source: frozen confirmation summary in the linked code and evidence package.</figcaption></figure>
     <p>Relevant minus no experience was +0.114 pp (nominal 95% bootstrap interval: 0.000 to 0.293 pp); relevant minus random was +0.024 pp (−0.114 to 0.203 pp). With 12 checkpoints and many ties, bootstrap intervals are fragile. A near-zero lower endpoint is not evidence that harm is impossible, and the sign-flip test requires a symmetry assumption.</p>
   </section>
   <section>
