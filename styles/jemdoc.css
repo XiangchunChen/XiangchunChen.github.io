@@ -414,22 +414,33 @@ a:focus {
 .lang-toggle-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  background: #eff6ff;
-  color: var(--primary-color);
-  border: 1.5px solid var(--secondary-color);
-  padding: 0.42rem 0.95rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  gap: 2px;
+  background: #f1f5f9;
+  border: 1px solid var(--border-color);
+  padding: 3px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
 .lang-toggle-btn:hover {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-  color: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.lang-opt {
+  padding: 0.24rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+}
+
+.lang-opt.is-active {
+  background: #ffffff;
+  color: var(--primary-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .award-badge {
