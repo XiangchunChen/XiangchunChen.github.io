@@ -528,7 +528,7 @@
                         style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #4a4a4a; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(168,237,234,0.3);"
                         onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(168,237,234,0.4);'"
                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(168,237,234,0.3);'">Demo</a>
-                    <button id="lang-toggle" class="lang-toggle-btn" type="button" aria-label="Switch language">中文</button>
+                    <button id="lang-toggle" class="lang-toggle-btn" type="button" aria-label="Switch language">🌐 中文版</button>
                 </div>
             </div>
         </nav>
@@ -1112,7 +1112,7 @@
             }
             const toggleBtn = document.getElementById('lang-toggle');
             if (toggleBtn) {
-                toggleBtn.textContent = lang === 'zh' ? 'EN' : '中文';
+                toggleBtn.textContent = lang === 'zh' ? '🌐 English' : '🌐 中文版';
             }
             try {
                 localStorage.setItem('site_lang', lang);
