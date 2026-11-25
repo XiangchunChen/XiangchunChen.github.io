@@ -47,9 +47,14 @@
 
     <!-- Navbar / Back Button -->
     <nav class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
-        <a href="../../demos.html" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-50 transition shadow-sm border border-gray-100">
-            <i class="fas fa-arrow-left"></i>
-        </a>
+        <div class="flex items-center gap-3">
+            <a href="../../demos.html" title="Back to Demos" class="px-4 h-10 rounded-full bg-white flex items-center justify-center gap-2 text-sm font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition shadow-sm border border-gray-100">
+                <i class="fas fa-arrow-left"></i> Demos
+            </a>
+            <a href="../../index.html" title="Back to Homepage" class="px-4 h-10 rounded-full bg-white flex items-center justify-center gap-2 text-sm font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition shadow-sm border border-gray-100">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </div>
     </nav>
 
     <main class="flex-grow w-full max-w-4xl mx-auto px-6 lg:px-8 pb-20">
@@ -60,19 +65,14 @@
             <p class="text-base leading-relaxed text-[#5c5c5c] mb-8">
                 PolyClaw is a local-first, privacy-by-design OpenClaw platform built for users and organizations that refuse to compromise on data sovereignty. By running all inference and storage entirely on-device, PolyClaw ensures that your conversations, documents, and personal data never leave your local environment.
             </p>
-            <div class="flex justify-center">
-                <a href="#" class="btn-primary flex items-center gap-2 px-8 py-3.5 rounded-xl font-medium shadow-md">
-                    Get Started <i class="fas fa-arrow-right text-sm"></i>
-                </a>
-            </div>
         </div>
 
         <!-- Video Section -->
         <div class="mb-20">
             <div class="bg-white rounded-[24px] p-3 shadow-[0_15px_50px_rgba(0,0,0,0.06)] border border-white/50 relative group">
                 <div class="rounded-xl overflow-hidden bg-black aspect-video relative flex items-center justify-center">
-                    <video controls class="w-full h-full object-cover">
-                        <source src="EdgeClaw%20Demo.mp4" type="video/mp4">
+                    <video controls preload="metadata" class="w-full h-full object-cover">
+                        <source src="EdgeClaw-Demo.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -147,7 +147,7 @@
     <footer class="mt-auto border-t border-gray-200/50 bg-[#f3ede1]/80 backdrop-blur-md">
         <div class="max-w-4xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="text-[#5c5c5c] text-sm">
-                &copy; 2024 Xiangchun Chen. Research Project.
+                &copy; 2026 Xiangchun Chen. Research Project.
             </div>
             <a href="https://github.com/XiangchunChen" target="_blank" class="w-10 h-10 rounded-full bg-white flex justify-center items-center text-gray-500 hover:text-[#1a1a1a] shadow-sm border border-gray-100 transition">
                 <i class="fab fa-github"></i>

@@ -17,16 +17,13 @@
     <meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Xiangchun Chen">
+    <meta name="description" content="Xiangchun Chen - Postdoctoral Researcher in the Department of Computing at The Hong Kong Polytechnic University. Research focus: Reliability-aware Agent Execution and Resource Management.">
     <meta name="author" content="Xiangchun Chen">
-    <meta property="og:description" content="Xiangchun Chen">
+    <meta property="og:title" content="Xiangchun Chen - Postdoctoral Researcher, PolyU">
+    <meta property="og:description" content="Postdoctoral Researcher in the Department of Computing at PolyU. Research focus: Reliability-aware Agent Execution and Resource Management.">
     <link rel="stylesheet" href="./styles/jemdoc.css" type="text/css" />
     <title>Xiangchun Chen</title>
-    <!-- MathJax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-    <!-- End MathJax -->
     <style>
-        /* index.html 内 <style> 区域追加/替换 */
         .supervisor-line {
             display: block;
             margin-top: 0.4em;
@@ -78,6 +75,29 @@
             z-index: 1000;
             font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
             transition: all 0.3s;
+        }
+
+        #ai-chat-widget.is-collapsed {
+            width: auto;
+            border-radius: 30px;
+        }
+
+        #ai-chat-widget.is-collapsed #chat-header {
+            border-radius: 30px;
+            padding: 12px 18px;
+            border-bottom: none;
+        }
+
+        #ai-chat-widget.is-collapsed .mascot-3d {
+            width: 52px;
+            height: 52px;
+            top: -10px;
+            left: 12px;
+        }
+
+        #ai-chat-widget.is-collapsed .header-title {
+            margin-left: 52px;
+            font-size: 0.95rem;
         }
 
         #chat-header {
@@ -153,6 +173,38 @@
             border-radius: 4px 20px 20px 20px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border: 1px solid #f0f0f0;
+            white-space: normal;
+        }
+
+        .msg-ai p {
+            margin: 0 0 0.45em;
+            line-height: 1.45;
+        }
+
+        .msg-ai p:last-child {
+            margin-bottom: 0;
+        }
+
+        .msg-ai ul {
+            margin: 0.35em 0;
+            padding-left: 1.25em;
+            list-style: disc;
+        }
+
+        .msg-ai li {
+            background: transparent;
+            border: none;
+            border-left: none;
+            border-radius: 0;
+            padding: 0.1em 0;
+            margin: 0;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .msg-ai li:hover {
+            transform: none;
+            box-shadow: none;
         }
 
         .msg-user {
@@ -267,7 +319,8 @@
             word-break: break-word;
         }
 
-        h2[id] {
+        h2[id],
+        h3[id] {
             scroll-margin-top: 110px;
         }
 
@@ -396,7 +449,8 @@
                 padding-top: 148px;
             }
 
-            h2[id] {
+            h2[id],
+            h3[id] {
                 scroll-margin-top: 148px;
             }
 
@@ -417,6 +471,12 @@
                 left: 12px;
                 right: 12px;
                 bottom: 12px;
+                width: auto;
+            }
+
+            #ai-chat-widget.is-collapsed {
+                left: auto;
+                right: 12px;
                 width: auto;
             }
 
@@ -458,186 +518,182 @@
         <nav id="site-nav"
             style="position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
             <div class="nav-shell">
-                <div class="nav-brand">Xiangchun Chen</div>
+                <div class="nav-brand" data-i18n="brand_name">Xiangchun Chen</div>
                 <div class="nav-links">
-                    <a href="#education">Education</a>
-                    <a href="#publications">Publications</a>
-                    <a href="#teaching">Teaching</a>
-                    <a href="#honors">Honors</a>
+                    <a href="#education" data-i18n="nav_education">Education</a>
+                    <a href="#publications" data-i18n="nav_publications">Publications</a>
+                    <a href="#teaching" data-i18n="nav_teaching">Teaching</a>
+                    <a href="#honors" data-i18n="nav_honors">Honors</a>
                     <a href="demos.html"
                         style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #4a4a4a; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(168,237,234,0.3);"
                         onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(168,237,234,0.4);'"
                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(168,237,234,0.3);'">Demo</a>
+                    <button id="lang-toggle" class="lang-toggle-btn" type="button" aria-label="Switch language">中文</button>
                 </div>
             </div>
         </nav>
         <div class="hero-section">
             <img src="./assets/xiangchunchen.jpg" alt="Xiangchun Chen" />
             <div class="hero-copy">
-                <h1>Xiangchun Chen</h1>
+                <h1 data-i18n="hero_name">Xiangchun Chen</h1>
                 <p style="font-size: 1.2rem; font-weight: 500; color: var(--secondary-color); margin-bottom: 0.5rem;">
-                    <b>Postdoctoral Researcher</b>
+                    <b data-i18n="hero_role">Postdoctoral Researcher</b>
                 </p>
-                <p class="research-tagline">Research Focus: Reliability-aware Agent Execution and Resource Management</p>
-                <p class="research-keywords">AI Agent · LLM · Reinforcement Learning · Digital Twin · Edge AI</p>
-                <p class="hero-summary">My research focuses on reliability-aware AI agent execution and resource management across AI agents, LLMs, digital twins, and edge AI.</p>
+                <p class="research-tagline" data-i18n="hero_tagline">Research Focus: Reliability-aware Agent Execution and Resource Management</p>
+                <p class="research-keywords" data-i18n="hero_keywords">AI Agent · LLM · Reinforcement Learning · Digital Twin · Edge AI</p>
+                <p class="hero-summary" data-i18n="hero_summary">My research focuses on reliability-aware AI agent execution and resource management across AI agents, LLMs, digital twins, and edge AI.</p>
 
-                <a href="https://www.comp.polyu.edu.hk/" target="_blank">Department of Computing (COMP)</a><br />
-                <a href="https://www.polyu.edu.hk/feng/" target="_blank">Faculty of Engineering</a><br />
-                <a href="https://www.polyu.edu.hk/web/en/home/index.html" target="_blank">The Hong Kong Polytechnic
+                <a href="https://www.comp.polyu.edu.hk/" target="_blank" rel="noopener noreferrer" data-i18n="dept_comp">Department of Computing (COMP)</a><br />
+                <a href="https://www.polyu.edu.hk/feng/" target="_blank" rel="noopener noreferrer" data-i18n="faculty_eng">Faculty of Engineering</a><br />
+                <a href="https://www.polyu.edu.hk/web/en/home/index.html" target="_blank" rel="noopener noreferrer" data-i18n="univ_polyu">The Hong Kong Polytechnic
                     University</a> <br />
 
                 <p class="contact-info" style="margin-top: 1rem;">
-                    <b>Office:</b> PQ 504, PQ Wing, PolyU, Hung Hom, Hong Kong.<br />
-                    <b>Email:</b>
+                    <b data-i18n="label_office">Office:</b> <span data-i18n="office_addr">PQ 504, PQ Wing, PolyU, Hung Hom, Hong Kong.</span><br />
+                    <b data-i18n="label_email">Email:</b>
                     <span
                         style="font-family: monospace; background: var(--light-bg); padding: 0.2rem 0.5rem; border-radius: 4px;">
                         xiang-chun.chen AT connect.polyu.hk
                     </span>
                     <br />
-                    <a href="https://scholar.google.com.hk/citations?user=WtxyVYMAAAAJ&amp;hl=zh-CN"><b>Google
-                            Scholar</b></a>
+                    <a href="https://scholar.google.com.hk/citations?user=WtxyVYMAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer"><b data-i18n="link_scholar">Google
+                            Scholar</b></a> |
+                    <a href="https://github.com/XiangchunChen" target="_blank" rel="noopener noreferrer"><b>GitHub</b></a>
                 </p>
             </div>
         </div>
         <div class="homepage-evidence" aria-label="Research highlights">
             <div class="evidence-card">
-                <span class="evidence-label">Recognition</span>
-                <strong>IEEE TCC 2024 Best Paper Award</strong>
+                <span class="evidence-label" data-i18n="ev_recog_label">Recognition</span>
+                <strong data-i18n="ev_recog_val">IEEE TCC 2024 Best Paper Award</strong>
             </div>
             <div class="evidence-card">
-                <span class="evidence-label">Publication record</span>
-                <strong>2 First-Author IEEE TMC Papers</strong>
+                <span class="evidence-label" data-i18n="ev_pub_label">Publication record</span>
+                <strong data-i18n="ev_pub_val">2 First-Author IEEE TMC Papers</strong>
             </div>
             <div class="evidence-card">
-                <span class="evidence-label">Research training</span>
-                <strong>PolyU Ph.D. · NII Visiting Scholar</strong>
+                <span class="evidence-label" data-i18n="ev_train_label">Research training</span>
+                <strong data-i18n="ev_train_val">PolyU Ph.D. · NII Visiting Scholar</strong>
             </div>
         </div>
-        <h2>Short Bio</h2>
-        <p style="text-align: justify;">Xiangchun Chen is a Postdoctoral Researcher at <a
-                href="https://www.polyu.edu.hk/">The Hong Kong Polytechnic University</a>. He received his Ph.D. in <a
-                href="https://www.polyu.edu.hk/comp/">Department of Computing</a>, <a
-                href="https://www.polyu.edu.hk/">The Hong Kong Polytechnic University</a>, supervised by <a
-                href="http://www4.comp.polyu.edu.hk/~csjcao/"><b>Prof. Jiannong Cao, IEEE Fellow</b></a>. Previously, he received the Bachelor Degree of Computer
-            Science and Technology from
-            <a href="http://www.cs.hit.edu.cn/?q=node/201">Faculty of Computing</a>, <a
-                href="https://www.hit.edu.cn/">Harbin Institute of Technology</a> in 2021.
+        <h2 data-i18n="sec_bio">Short Bio</h2>
+        <p style="text-align: justify;" data-i18n-html="bio_p1">Xiangchun Chen is a Postdoctoral Researcher at <a
+                href="https://www.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">The Hong Kong Polytechnic University</a>. He received his Ph.D. from the <a
+                href="https://www.comp.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">Department of Computing</a>, <a
+                href="https://www.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">The Hong Kong Polytechnic University</a>, supervised by <a
+                href="https://www4.comp.polyu.edu.hk/~csjcao/" target="_blank" rel="noopener noreferrer"><b>Prof. Jiannong Cao, IEEE Fellow</b></a>. Previously, he received his B.E. degree in Computer
+            Science and Technology from the
+            <a href="https://cs.hit.edu.cn/" target="_blank" rel="noopener noreferrer">Faculty of Computing</a>, <a
+                href="https://www.hit.edu.cn/" target="_blank" rel="noopener noreferrer">Harbin Institute of Technology</a> in 2021.
         </p>
 
-        <p style="text-align: justify;">His research interests currently focus on reliability-aware AI agent execution and resource management across AI agents, LLMs, digital twins, and edge AI.</p>
+        <p style="text-align: justify;" data-i18n="bio_p2">His research interests currently focus on reliability-aware AI agent execution and resource management across AI agents, LLMs, digital twins, and edge AI.</p>
 
-        <h3 id="research-focus">Research Focus</h3>
+        <h3 id="research-focus" data-i18n="sec_focus">Research Focus</h3>
         <ul class="research-focus-list">
-            <li><b>Reliability-aware AI Agent Execution.</b> Dependable planning, execution, and adaptation for autonomous AI agents under dynamic conditions.</li>
-            <li><b>Resource Management &amp; Edge AI.</b> Efficient task offloading, scheduling, and resource coordination in collaborative edge environments.</li>
-            <li><b>LLM &amp; Digital Twin Systems.</b> Distributed LLM inference, state migration, and digital twin-assisted decision-making across edge infrastructure.</li>
+            <li data-i18n-html="focus_1"><b>Reliability-aware AI Agent Execution.</b> Dependable planning, execution, and adaptation for autonomous AI agents under dynamic conditions.</li>
+            <li data-i18n-html="focus_2"><b>Resource Management &amp; Edge AI.</b> Efficient task offloading, scheduling, and resource coordination in collaborative edge environments.</li>
+            <li data-i18n-html="focus_3"><b>LLM &amp; Digital Twin Systems.</b> Distributed LLM inference, state migration, and digital twin-assisted decision-making across edge infrastructure.</li>
         </ul>
 
-        <div id="ai-chat-widget">
+        <div id="ai-chat-widget" class="is-collapsed">
             <div id="chat-header" role="button" tabindex="0" aria-expanded="false">
                 <div class="mascot-3d">
                     <img src="./assets/usagi.gif" alt="3D Usagi" />
                 </div>
-                <span class="header-title">Ask Me Anything!</span>
+                <span class="header-title" data-i18n="chat_title">Ask Me Anything!</span>
             </div>
             <div id="chat-content" style="display:none;">
                 <div id="chat-history">
-                    <div class="msg msg-ai">Hello! I'm Xiangchun Chen's AI Assistant. 🐰<br>Ask me anything!</div>
+                    <div class="msg msg-ai" data-i18n-html="chat_welcome">Hello! I'm Xiangchun Chen's AI Assistant. 🐰<br>Ask me anything!</div>
                 </div>
                 <div id="chat-input-area">
                     <input type="text" id="chat-input" placeholder="Ask something..."
                         aria-label="Ask Xiangchun Chen's AI assistant a question">
-                    <button id="chat-btn" type="button">Send</button>
+                    <button id="chat-btn" type="button" data-i18n="chat_send">Send</button>
                 </div>
             </div>
         </div>
-        <h2 id="education">Education &amp; Research Experience</h2>
+        <h2 id="education" data-i18n="sec_edu">Education &amp; Research Experience</h2>
         <ul>
-            <li>
-                <font style="color:#527bbd;"><b>Postdoctoral Researcher</b></font>&nbsp; The Hong Kong Polytechnic University, Hong Kong,
-                China. 2026 - Present
-                <span class="supervisor-line">Department of Computing &middot; Research Focus: Reliability-aware Agent Execution and Resource Management</span>
+            <li data-i18n-html="edu_postdoc">
+                <span class="edu-role">Postdoctoral Researcher</span>, Department of Computing, The Hong Kong Polytechnic University, Hong Kong,
+                China. Jul. 2026 - Present
+                <span class="supervisor-line">Research Focus: Reliability-aware Agent Execution and Resource Management</span>
             </li>
 
-            <li>
-                <font style="color:#527bbd;"><b>Ph.D.</b></font>&nbsp; in Computer Science and Technology, The Hong Kong Polytechnic University, Hong Kong,
-                China. 2021 - 2026
-                <span class="supervisor-line">Supervisor: <a href="https://www4.comp.polyu.edu.hk/~csjcao/">
-                        <font style="color:#527bbd;"><b>Prof. Jiannong Cao, IEEE Fellow, Vice President of PolyU, Member of Academia Europaea</b>
-                        </font>
+            <li data-i18n-html="edu_phd">
+                <span class="edu-role">Ph.D.</span> in Computer Science and Technology, The Hong Kong Polytechnic University, Hong Kong,
+                China. 2021 - May 2026
+                <span class="supervisor-line">Supervisor: <a href="https://www4.comp.polyu.edu.hk/~csjcao/" target="_blank" rel="noopener noreferrer">
+                        <b>Prof. Jiannong Cao, IEEE Fellow, Vice President of PolyU, Member of Academia Europaea</b>
                     </a></span>
             </li>
 
-            <li>
-                <font style="color:#527bbd;"><b>Visiting Scholar</b></font>&nbsp; National Institute of Informatics,
+            <li data-i18n-html="edu_nii">
+                <span class="edu-role">Visiting Scholar</span>, National Institute of Informatics (NII),
                 Tokyo, Japan. 2024 - 2025
-                <span class="supervisor-line">Supervisor: <a href="https://researchmap.jp/keiusei?lang=en">
-                        <font style="color:#527bbd;"><b>Prof. Yusheng Ji, IEEE Fellow</b></font>
+                <span class="supervisor-line">Supervisor: <a href="https://researchmap.jp/keiusei?lang=en" target="_blank" rel="noopener noreferrer">
+                        <b>Prof. Yusheng Ji, IEEE Fellow</b>
                     </a></span>
             </li>
 
-            <li>
-                <font style="color:#527bbd;"><b>B.E.</b></font>&nbsp; in Computer Science and Technology, Harbin Institute of Technology, Harbin, China.
-                2017 - 2021 <br>
+            <li data-i18n-html="edu_be">
+                <span class="edu-role">B.E.</span> in Computer Science and Technology, Harbin Institute of Technology, Harbin, China.
+                2017 - 2021
             </li>
         </ul>
 
-        <h2 id="publications">Publications</h2>
-        <h3 id="journal-articles">Selected Journal Publications</h3>
+        <h2 id="publications" data-i18n="sec_pub">Publications</h2>
+        <h3 id="journal-articles" data-i18n="sec_pub_journal">Selected Journal Publications</h3>
 
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[TMC]</b></font>&nbsp; <a
-                        href="https://ieeexplore.ieee.org/document/11224639" target="_blank">
+                    <span class="venue-badge">[TMC]</span><a
+                        href="https://ieeexplore.ieee.org/document/11224639" target="_blank" rel="noopener noreferrer">
                         Decentralized Task Offloading in Collaborative Edge Computing: A Digital Twin Assisted
                         Multi-Agent Reinforcement Learning Approach</a>, <br />
                     <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Rui Cao, Yuvraj Sahni, Mingjin Zhang, and Yusheng Ji.
                     <br />
-                    in IEEE Transactions on Mobile Computing, vol. 25, no. 4, pp. 4776&ndash;4790, 2026.<br />
-                    (<a href="https://www.letpub.com.cn/index.php?journalid=3403&amp;page=journalapp&amp;view=detail"
-                        target="_blank"><b>CCF A, SCI I, JCR Q1</b></a>).<br />
+                    In IEEE Transactions on Mobile Computing, vol. 25, no. 4, pp. 4776&ndash;4790, 2026.<br />
+                    (<b>CCF A, SCI I, JCR Q1</b>).<br />
                 </p>
             </li>
         </ul>
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[TMC]</b></font>&nbsp; <a
-                        href="https://ieeexplore.ieee.org/abstract/document/10767295" target="_blank">
+                    <span class="venue-badge">[TMC]</span><a
+                        href="https://ieeexplore.ieee.org/abstract/document/10767295" target="_blank" rel="noopener noreferrer">
                         Mobility-aware Dependent Task Offloading in Edge Computing: A Digital Twin-assisted
                         Reinforcement Learning Approach</a>, <br />
                     <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Mingjin Zhang, Zhixuan Liang, and Lei
                     Yang. <br />
-                    in IEEE Transactions on Mobile Computing, vol. 24, no. 4, pp. 2979&ndash;2994, 2025.<br />
-                    (<a href="https://www.letpub.com.cn/index.php?journalid=3403&amp;page=journalapp&amp;view=detail"
-                        target="_blank"><b>CCF A, SCI I, JCR Q1</b></a>).<br />
+                    In IEEE Transactions on Mobile Computing, vol. 24, no. 4, pp. 2979&ndash;2994, 2025.<br />
+                    (<b>CCF A, SCI I, JCR Q1</b>).<br />
                 </p>
             </li>
         </ul>
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[TCC]</b></font>&nbsp; <a
-                        href="https://ieeexplore.ieee.org/document/10480253" target="_blank">
+                    <span class="venue-badge">[TCC]</span><a
+                        href="https://ieeexplore.ieee.org/document/10480253" target="_blank" rel="noopener noreferrer">
                         Dynamic Task Offloading in Edge Computing based on Dependency-aware Reinforcement Learning</a>,
                     <br />
                     <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Yuvraj Sahni, Shan Jiang, and Zhixuan Liang. <br />
-                    in IEEE Transactions on Cloud Computing, vol. 12, no. 2, pp. 594&ndash;608, 2024.<br />
-                    (<a href="https://www.letpub.com.cn/index.php?journalid=10347&amp;page=journalapp&amp;view=detail"
-                        target="_blank"><b>IEEE Transactions on Cloud Computing Best Paper Award 2024, CCF B, SCI II,
-                            JCR
-                            Q1</b></a>).<br />
+                    In IEEE Transactions on Cloud Computing, vol. 12, no. 2, pp. 594&ndash;608, 2024.<br />
+                    (<a href="https://ieeexplore.ieee.org/document/10480253" target="_blank" rel="noopener noreferrer"><span class="award-badge">IEEE Transactions on Cloud Computing Best Paper Award 2024</span></a>, <b>CCF B, SCI II, JCR Q1</b>).<br />
                 </p>
             </li>
         </ul>
-        <h3 id="preprints">Preprints / Under Review</h3>
+        <h3 id="preprints" data-i18n="sec_pub_preprint">Preprints / Under Review</h3>
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[Preprint]</b></font>&nbsp; <a
-                        href="https://arxiv.org/abs/2611.32520" target="_blank">
+                    <span class="venue-badge">[Preprint]</span><a
+                        href="https://arxiv.org/abs/2611.32520" target="_blank" rel="noopener noreferrer">
                         Reliability-aware AI Agent Execution in Collaborative Edge Computing: A World Model Approach</a>,
                     <br />
                     <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Longxiang Gao, Xiaoming Wu, and Yusheng Ji. <br />
@@ -646,17 +702,17 @@
                 </p>
             </li>
         </ul>
-        <h3 id="conference-articles">Selected Conference Publications</h3>
+        <h3 id="conference-articles" data-i18n="sec_pub_conf">Selected Conference Publications</h3>
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[MASS]</b></font>&nbsp; <a
-                        href="https://doi.org/10.1109/MASS58611.2023.00012" target="_blank">
+                    <span class="venue-badge">[MASS]</span><a
+                        href="https://doi.org/10.1109/MASS58611.2023.00012" target="_blank" rel="noopener noreferrer">
                         Digital Twin-assisted Reinforcement Learning for Resource-aware Microservice Offloading in Edge
                         Computing</a>, <br />
                     <u><b>Xiangchun Chen</b></u>, Jiannong Cao, Zhixuan Liang, Yuvraj Sahni, and Mingjin Zhang. <br />
-                    in IEEE 20th International Conference on Mobile Ad Hoc and Smart Systems (MASS), pp. 28&ndash;36, 2023.<br />
-                    (<a href="https://www.ccf.org.cn/Academic_Evaluation/NIS/" target="_blank"><b>CCF-C</b></a>).<br />
+                    In IEEE 20th International Conference on Mobile Ad Hoc and Smart Systems (MASS), pp. 28&ndash;36, 2023.<br />
+                    (<a href="https://www.ccf.org.cn/Academic_Evaluation/NIS/" target="_blank" rel="noopener noreferrer"><b>CCF-C</b></a>).<br />
                 </p>
             </li>
         </ul>
@@ -664,13 +720,12 @@
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[ICDCS]</b></font>&nbsp; <a
-                        href="https://doi.org/10.1109/2575-8411.2026.00033" target="_blank">
-                        Efficient KV Cache Migration for Geo-Distributed LLM Inference in Collaborative Edge Computing
-                    </a>,
+                    <span class="venue-badge">[ICDCS]</span><a
+                        href="https://doi.org/10.1109/2575-8411.2026.00033" target="_blank" rel="noopener noreferrer">
+                        Efficient KV Cache Migration for Geo-Distributed LLM Inference in Collaborative Edge Computing</a>,
                     <br />
                     Mingjin Zhang, Jiannong Cao, Tao Wu, <u><b>Xiangchun Chen</b></u>, and Ne Wang. <br />
-                    in the 46th IEEE International Conference on Distributed Computing Systems (ICDCS), pp. 272&ndash;282, 2026.<br />
+                    In the 46th IEEE International Conference on Distributed Computing Systems (ICDCS), pp. 272&ndash;282, 2026.<br />
                     (<b>CCF-B</b>).<br />
                 </p>
             </li>
@@ -679,122 +734,172 @@
         <ul>
             <li>
                 <p>
-                    <font style="color:#527bbd;"><b>[ICNC]</b></font>&nbsp; <a
-                        href="https://doi.org/10.1109/ICNC59896.2024.10556386" target="_blank">
-                        Resource-efficient Parallel Split Learning in Heterogeneous Edge Computing </a>, <br />
+                    <span class="venue-badge">[ICNC]</span><a
+                        href="https://doi.org/10.1109/ICNC59896.2024.10556386" target="_blank" rel="noopener noreferrer">
+                        Resource-efficient Parallel Split Learning in Heterogeneous Edge Computing</a>, <br />
                     Mingjin Zhang, Jiannong Cao, Yuvraj Sahni, <u><b>Xiangchun Chen</b></u>, and Shan Jiang. <br />
-                    in 2024 International Conference on Computing, Networking and Communications (ICNC), pp. 794&ndash;798, 2024.<br />
+                    In 2024 International Conference on Computing, Networking and Communications (ICNC), pp. 794&ndash;798, 2024.<br />
                     <br />
                 </p>
             </li>
         </ul>
 
 
-        <h2 id="teaching">Teaching Experience</h2>
+        <h2 id="teaching" data-i18n="sec_teaching">Teaching Experience</h2>
 
         <ul>
-            <li>
+            <li data-i18n="teach_1">
                 Teaching Assistant, Metaverse Applications: Design And Case Studies, Spring 2024.
             </li>
-            <li>
+            <li data-i18n="teach_2">
                 Teaching Assistant, Programming Fundamentals and Applications, Fall 2023.
             </li>
-            <li>
+            <li data-i18n="teach_3">
                 Teaching Assistant, Computer Networking, Spring 2023.
             </li>
-            <li>
+            <li data-i18n="teach_4">
                 Teaching Assistant, Programming Fundamentals and Applications, Fall 2022.
             </li>
-            <li>
+            <li data-i18n="teach_5">
                 Teaching Assistant, Programming Fundamentals, Spring 2022.
             </li>
-            <li>
+            <li data-i18n="teach_6">
                 Teaching Assistant, Computer Programming, Fall 2021.
             </li>
         </ul>
 
-        <h2>Academic Service</h2>
+        <h2 id="service" data-i18n="sec_service">Academic Service</h2>
 
-        <h3>PC Member/Journal Reviewer</h3>
+        <h3 data-i18n="sec_reviewer">Journal Reviewer</h3>
         <ul>
-            <li>Reviewer for IEEE Transactions on Mobile Computing (<b>IEEE TMC</b>)</li>
+            <li data-i18n-html="rev_tmc">Reviewer for IEEE Transactions on Mobile Computing (<b>IEEE TMC</b>)</li>
         </ul>
         <ul>
-            <li>Reviewer for IEEE Transactions on Cognitive Communications and Networking (<b>IEEE TCCN</b>) </li>
+            <li data-i18n-html="rev_tccn">Reviewer for IEEE Transactions on Cognitive Communications and Networking (<b>IEEE TCCN</b>)</li>
         </ul>
         <ul>
-            <li>Reviewer for IEEE/ACM Transactions on Networking (<b>IEEE/ACM TON</b>)</li>
+            <li data-i18n-html="rev_ton">Reviewer for IEEE/ACM Transactions on Networking (<b>IEEE/ACM TON</b>)</li>
         </ul>
         <ul>
-            <li>Reviewer for IEEE Internet of Things Journal (<b>IEEE IoT-J</b>)</li>
+            <li data-i18n-html="rev_iotj">Reviewer for IEEE Internet of Things Journal (<b>IEEE IoT-J</b>)</li>
         </ul>
         <!--<h3>Membership</h3>-->
 
-        <h2 id="honors">Selected Honors</h2>
+        <h2 id="honors" data-i18n="sec_honors">Selected Honors</h2>
 
         <ul>
-            <li>IEEE Transactions on Cloud Computing 2024 Best Paper Award.<br>
+            <li data-i18n-html="hon_tcc">IEEE Transactions on Cloud Computing 2024 Best Paper Award.<br>
                 Awarded by the IEEE Computer Society Publications Board.
             </li>
 
-            <li>Postgraduate Studentship, HKPolyU.<br>
+            <li data-i18n-html="hon_polyu">Postgraduate Studentship, HKPolyU.<br>
                 Awarded by Hong Kong Polytechnic University.
             </li>
 
-            <li>Ren-Min Scholarship.<br>
+            <li data-i18n-html="hon_hit">Ren-Min Scholarship.<br>
                 Awarded by Harbin Institute of Technology.
             </li>
 
         </ul>
 
-        <h2>Work Experience</h2>
+        <h2 data-i18n="sec_work">Work Experience</h2>
 
         <ul>
-            <li>
+            <li data-i18n="work_ant">
                 Backend Development Intern (Distributed IM Storage), Ant Group (formerly Ant Financial Services Group; affiliate of Alibaba
                 Group), Chengdu, China. 2020.
             </li>
         </ul>
 
 
-        <h2>Sponsors/Collaborators</h2>
-        I sincerely thank these sponsors/collaborators for providing great support for my research.
+        <h2 data-i18n="sec_sponsors">Sponsors/Collaborators</h2>
+        <span data-i18n="sponsors_desc">I sincerely thank these sponsors/collaborators for providing great support for my research.</span>
         <div class="sponsor-logos">
             <img src="./assets/polyu.jpg" height="100" alt="PolyU">
             <img src="./assets/IMCL.png" height="100" alt="IMCL">
             <img src="./assets/KLab.jpg" height="100" alt="NII">
         </div>
 
-        <h2>News</h2>
+        <h2 data-i18n="sec_news">News</h2>
         <ul>
-            <li>
+            <li data-i18n="news_2026">
                 [2026] Started as a Postdoctoral Researcher in the Department of Computing at The Hong Kong Polytechnic University!
             </li>
-            <li>
+            <li data-i18n="news_2025_10">
                 [10/2025] Congratulations! Our paper, "Decentralized Task Offloading in Collaborative Edge Computing: A Digital Twin Assisted Multi-Agent Reinforcement Learning Approach", has been accepted
                 at IEEE Transactions on Mobile Computing!
             </li>
-            <li>
+            <li data-i18n="news_2025_08">
                 [08/2025] Congratulations! Our paper, "Dynamic Task Offloading in Edge Computing Based on
                 Dependency-Aware Reinforcement Learning", has been selected as the Winner of the 2024 Best Paper
                 Award from IEEE Transactions on Cloud Computing by the IEEE Computer Society Publications Board!
             </li>
-            <li>
+            <li data-i18n="news_2024_11">
                 [11/2024] Congratulations! Our paper "Mobility-aware Dependent Task Offloading in Edge Computing: A
                 Digital Twin-assisted Reinforcement Learning Approach" has been accepted at IEEE Transactions on
                 Mobile Computing!
             </li>
         </ul>
+        <footer class="site-footer" data-i18n="footer_text">
+            &copy; 2026 Xiangchun Chen. Last updated: Nov 2026.
+        </footer>
     </div>
     <script>
         const WORKER_URL = "https://ai-research-assistant.xiangchunchen78.workers.dev/";
 
         function toggleChat() {
+            const widget = document.getElementById('ai-chat-widget');
             const content = document.getElementById('chat-content');
             const header = document.getElementById('chat-header');
             const isHidden = window.getComputedStyle(content).display === 'none';
             content.style.display = isHidden ? 'flex' : 'none';
+            if (widget) {
+                widget.classList.toggle('is-collapsed', !isHidden);
+            }
             header.setAttribute('aria-expanded', String(isHidden));
+        }
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function formatInlineMarkdown(escapedLine) {
+            return escapedLine.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+        }
+
+        function renderSafeMarkdown(text) {
+            const lines = text.replace(/\r\n/g, '\n').split('\n');
+            const htmlParts = [];
+            let inList = false;
+
+            for (const rawLine of lines) {
+                const trimmed = rawLine.trim();
+                const listMatch = trimmed.match(/^[-*]\s+(.+)$/);
+                if (listMatch) {
+                    if (!inList) {
+                        htmlParts.push('<ul>');
+                        inList = true;
+                    }
+                    htmlParts.push(`<li>${formatInlineMarkdown(escapeHtml(listMatch[1]))}</li>`);
+                } else {
+                    if (inList) {
+                        htmlParts.push('</ul>');
+                        inList = false;
+                    }
+                    if (trimmed) {
+                        htmlParts.push(`<p>${formatInlineMarkdown(escapeHtml(trimmed))}</p>`);
+                    }
+                }
+            }
+            if (inList) {
+                htmlParts.push('</ul>');
+            }
+            return htmlParts.join('');
         }
 
         function appendChatMessage(type, text) {
@@ -830,13 +935,190 @@
                 }
                 const data = await res.json();
                 const responseText = typeof data.response === 'string' && data.response.trim() ? data.response.trim() : 'No response returned.';
-                thinkingMessage.textContent = `AI: ${responseText}`;
+                thinkingMessage.innerHTML = renderSafeMarkdown(`**AI:** ${responseText}`);
             } catch (err) {
                 thinkingMessage.textContent = 'Error connecting to AI.';
             } finally {
                 button.disabled = false;
             }
             history.scrollTop = history.scrollHeight;
+        }
+
+        const I18N = {
+            en: {
+                brand_name: 'Xiangchun Chen',
+                nav_education: 'Education',
+                nav_publications: 'Publications',
+                nav_teaching: 'Teaching',
+                nav_honors: 'Honors',
+                hero_name: 'Xiangchun Chen',
+                hero_role: 'Postdoctoral Researcher',
+                hero_tagline: 'Research Focus: Reliability-aware Agent Execution and Resource Management',
+                hero_keywords: 'AI Agent · LLM · Reinforcement Learning · Digital Twin · Edge AI',
+                hero_summary: 'My research focuses on reliability-aware AI agent execution and resource management across AI agents, LLMs, digital twins, and edge AI.',
+                dept_comp: 'Department of Computing (COMP)',
+                faculty_eng: 'Faculty of Engineering',
+                univ_polyu: 'The Hong Kong Polytechnic University',
+                label_office: 'Office:',
+                office_addr: 'PQ 504, PQ Wing, PolyU, Hung Hom, Hong Kong.',
+                label_email: 'Email:',
+                link_scholar: 'Google Scholar',
+                ev_recog_label: 'Recognition',
+                ev_recog_val: 'IEEE TCC 2024 Best Paper Award',
+                ev_pub_label: 'Publication record',
+                ev_pub_val: '2 First-Author IEEE TMC Papers',
+                ev_train_label: 'Research training',
+                ev_train_val: 'PolyU Ph.D. · NII Visiting Scholar',
+                sec_bio: 'Short Bio',
+                bio_p1: 'Xiangchun Chen is a Postdoctoral Researcher at <a href="https://www.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">The Hong Kong Polytechnic University</a>. He received his Ph.D. from the <a href="https://www.comp.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">Department of Computing</a>, <a href="https://www.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">The Hong Kong Polytechnic University</a>, supervised by <a href="https://www4.comp.polyu.edu.hk/~csjcao/" target="_blank" rel="noopener noreferrer"><b>Prof. Jiannong Cao, IEEE Fellow</b></a>. Previously, he received his B.E. degree in Computer Science and Technology from the <a href="https://cs.hit.edu.cn/" target="_blank" rel="noopener noreferrer">Faculty of Computing</a>, <a href="https://www.hit.edu.cn/" target="_blank" rel="noopener noreferrer">Harbin Institute of Technology</a> in 2021.',
+                bio_p2: 'His research interests currently focus on reliability-aware AI agent execution and resource management across AI agents, LLMs, digital twins, and edge AI.',
+                sec_focus: 'Research Focus',
+                focus_1: '<b>Reliability-aware AI Agent Execution.</b> Dependable planning, execution, and adaptation for autonomous AI agents under dynamic conditions.',
+                focus_2: '<b>Resource Management &amp; Edge AI.</b> Efficient task offloading, scheduling, and resource coordination in collaborative edge environments.',
+                focus_3: '<b>LLM &amp; Digital Twin Systems.</b> Distributed LLM inference, state migration, and digital twin-assisted decision-making across edge infrastructure.',
+                chat_title: 'Ask Me Anything!',
+                chat_welcome: "Hello! I'm Xiangchun Chen's AI Assistant. 🐰<br>Ask me anything!",
+                chat_placeholder: 'Ask something...',
+                chat_send: 'Send',
+                sec_edu: 'Education & Research Experience',
+                edu_postdoc: '<span class="edu-role">Postdoctoral Researcher</span>, Department of Computing, The Hong Kong Polytechnic University, Hong Kong, China. Jul. 2026 - Present <span class="supervisor-line">Research Focus: Reliability-aware Agent Execution and Resource Management</span>',
+                edu_phd: '<span class="edu-role">Ph.D.</span> in Computer Science and Technology, The Hong Kong Polytechnic University, Hong Kong, China. 2021 - May 2026 <span class="supervisor-line">Supervisor: <a href="https://www4.comp.polyu.edu.hk/~csjcao/" target="_blank" rel="noopener noreferrer"><b>Prof. Jiannong Cao, IEEE Fellow, Vice President of PolyU, Member of Academia Europaea</b></a></span>',
+                edu_nii: '<span class="edu-role">Visiting Scholar</span>, National Institute of Informatics (NII), Tokyo, Japan. 2024 - 2025 <span class="supervisor-line">Supervisor: <a href="https://researchmap.jp/keiusei?lang=en" target="_blank" rel="noopener noreferrer"><b>Prof. Yusheng Ji, IEEE Fellow</b></a></span>',
+                edu_be: '<span class="edu-role">B.E.</span> in Computer Science and Technology, Harbin Institute of Technology, Harbin, China. 2017 - 2021',
+                sec_pub: 'Publications',
+                sec_pub_journal: 'Selected Journal Publications',
+                sec_pub_preprint: 'Preprints / Under Review',
+                sec_pub_conf: 'Selected Conference Publications',
+                sec_teaching: 'Teaching Experience',
+                teach_1: 'Teaching Assistant, Metaverse Applications: Design And Case Studies, Spring 2024.',
+                teach_2: 'Teaching Assistant, Programming Fundamentals and Applications, Fall 2023.',
+                teach_3: 'Teaching Assistant, Computer Networking, Spring 2023.',
+                teach_4: 'Teaching Assistant, Programming Fundamentals and Applications, Fall 2022.',
+                teach_5: 'Teaching Assistant, Programming Fundamentals, Spring 2022.',
+                teach_6: 'Teaching Assistant, Computer Programming, Fall 2021.',
+                sec_service: 'Academic Service',
+                sec_reviewer: 'Journal Reviewer',
+                rev_tmc: 'Reviewer for IEEE Transactions on Mobile Computing (<b>IEEE TMC</b>)',
+                rev_tccn: 'Reviewer for IEEE Transactions on Cognitive Communications and Networking (<b>IEEE TCCN</b>)',
+                rev_ton: 'Reviewer for IEEE/ACM Transactions on Networking (<b>IEEE/ACM TON</b>)',
+                rev_iotj: 'Reviewer for IEEE Internet of Things Journal (<b>IEEE IoT-J</b>)',
+                sec_honors: 'Selected Honors',
+                hon_tcc: 'IEEE Transactions on Cloud Computing 2024 Best Paper Award.<br>Awarded by the IEEE Computer Society Publications Board.',
+                hon_polyu: 'Postgraduate Studentship, HKPolyU.<br>Awarded by Hong Kong Polytechnic University.',
+                hon_hit: 'Ren-Min Scholarship.<br>Awarded by Harbin Institute of Technology.',
+                sec_work: 'Work Experience',
+                work_ant: 'Backend Development Intern (Distributed IM Storage), Ant Group (formerly Ant Financial Services Group; affiliate of Alibaba Group), Chengdu, China. 2020.',
+                sec_sponsors: 'Sponsors/Collaborators',
+                sponsors_desc: 'I sincerely thank these sponsors/collaborators for providing great support for my research.',
+                sec_news: 'News',
+                news_2026: '[2026] Started as a Postdoctoral Researcher in the Department of Computing at The Hong Kong Polytechnic University!',
+                news_2025_10: '[10/2025] Congratulations! Our paper, "Decentralized Task Offloading in Collaborative Edge Computing: A Digital Twin Assisted Multi-Agent Reinforcement Learning Approach", has been accepted at IEEE Transactions on Mobile Computing!',
+                news_2025_08: '[08/2025] Congratulations! Our paper, "Dynamic Task Offloading in Edge Computing Based on Dependency-Aware Reinforcement Learning", has been selected as the Winner of the 2024 Best Paper Award from IEEE Transactions on Cloud Computing by the IEEE Computer Society Publications Board!',
+                news_2024_11: '[11/2024] Congratulations! Our paper "Mobility-aware Dependent Task Offloading in Edge Computing: A Digital Twin-assisted Reinforcement Learning Approach" has been accepted at IEEE Transactions on Mobile Computing!',
+                footer_text: '© 2026 Xiangchun Chen. Last updated: Nov 2026.'
+            },
+            zh: {
+                brand_name: '陈祥春',
+                nav_education: '教育与经历',
+                nav_publications: '学术成果',
+                nav_teaching: '教学经历',
+                nav_honors: '荣誉奖项',
+                hero_name: '陈祥春',
+                hero_role: '博士后研究员',
+                hero_tagline: '研究聚焦：面向可靠性的智能体执行与资源管理',
+                hero_keywords: '智能体（AI Agent）· 大语言模型（LLM）· 强化学习 · 数字孪生 · 边缘智能',
+                hero_summary: '主要围绕面向可靠性的智能体执行与资源管理开展研究，涵盖 AI Agent、大语言模型、数字孪生与边缘智能等方向。',
+                dept_comp: '电子计算学系（COMP）',
+                faculty_eng: '工程学院',
+                univ_polyu: '香港理工大学',
+                label_office: '办公室：',
+                office_addr: '中国香港红磡 香港理工大学 PQ 座 PQ 504 室',
+                label_email: '邮箱：',
+                link_scholar: 'Google Scholar',
+                ev_recog_label: '代表性荣誉',
+                ev_recog_val: 'IEEE TCC 2024 年度最佳论文奖',
+                ev_pub_label: '代表性论文',
+                ev_pub_val: '2 篇一作 IEEE TMC 期刊论文',
+                ev_train_label: '学术训练',
+                ev_train_val: '香港理工大学博士 · 日本 NII 访问学者',
+                sec_bio: '个人简介',
+                bio_p1: '陈祥春，现任<a href="https://www.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">香港理工大学</a>博士后研究员。博士毕业于<a href="https://www.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">香港理工大学</a><a href="https://www.comp.polyu.edu.hk/" target="_blank" rel="noopener noreferrer">电子计算学系</a>，师从<a href="https://www4.comp.polyu.edu.hk/~csjcao/" target="_blank" rel="noopener noreferrer"><b>曹建农 教授（IEEE Fellow、香港理工大学副校长、欧洲科学院院士）</b></a>；本科于 2021 年毕业于<a href="https://www.hit.edu.cn/" target="_blank" rel="noopener noreferrer">哈尔滨工业大学</a><a href="https://cs.hit.edu.cn/" target="_blank" rel="noopener noreferrer">计算学部</a>，获工学学士学位。',
+                bio_p2: '目前研究主要聚焦面向可靠性的智能体执行与资源管理，涵盖智能体（AI Agent）、大语言模型（LLM）、数字孪生与边缘智能。',
+                sec_focus: '研究聚焦',
+                focus_1: '<b>面向可靠性的 AI Agent 执行。</b>研究动态资源与复杂环境下自主智能体的可靠规划、执行与自适应机制。',
+                focus_2: '<b>资源管理与边缘智能。</b>研究协同边缘环境下的高效任务卸载、调度优化与多节点资源协同。',
+                focus_3: '<b>大语言模型与数字孪生系统。</b>研究面向边缘基础设施的分布式 LLM 推理、状态迁移及数字孪生辅助决策。',
+                chat_title: '欢迎向我提问！',
+                chat_welcome: '你好！我是陈祥春的 AI 学术助手 🐰<br>欢迎询问科研方向、经历或联系方式。',
+                chat_placeholder: '输入你的问题...',
+                chat_send: '发送',
+                sec_edu: '教育与科研经历',
+                edu_postdoc: '<span class="edu-role">博士后研究员</span>，香港理工大学 电子计算学系，中国香港，2026年7月 – 至今 <span class="supervisor-line">研究聚焦：面向可靠性的智能体执行与资源管理</span>',
+                edu_phd: '<span class="edu-role">哲学博士</span>，计算机科学与技术，香港理工大学，中国香港，2021 – 2026年5月 <span class="supervisor-line">导师：<a href="https://www4.comp.polyu.edu.hk/~csjcao/" target="_blank" rel="noopener noreferrer"><b>曹建农 教授（IEEE Fellow、香港理工大学副校长、欧洲科学院院士）</b></a></span>',
+                edu_nii: '<span class="edu-role">访问学者</span>，日本国立信息学研究所（NII），日本东京，2024 – 2025 <span class="supervisor-line">导师：<a href="https://researchmap.jp/keiusei?lang=en" target="_blank" rel="noopener noreferrer"><b>计宇生 教授（IEEE Fellow）</b></a></span>',
+                edu_be: '<span class="edu-role">工学学士</span>，计算机科学与技术，哈尔滨工业大学，中国哈尔滨，2017 – 2021',
+                sec_pub: '学术成果',
+                sec_pub_journal: '期刊论文',
+                sec_pub_preprint: '预印本 / 在审论文',
+                sec_pub_conf: '会议论文',
+                sec_teaching: '教学经历',
+                teach_1: '课程助教，《元宇宙应用：设计与案例研究》（Metaverse Applications: Design And Case Studies），2024 春。',
+                teach_2: '课程助教，《程序设计基础与应用》（Programming Fundamentals and Applications），2023 秋。',
+                teach_3: '课程助教，《计算机网络》（Computer Networking），2023 春。',
+                teach_4: '课程助教，《程序设计基础与应用》（Programming Fundamentals and Applications），2022 秋。',
+                teach_5: '课程助教，《程序设计基础》（Programming Fundamentals），2022 春。',
+                teach_6: '课程助教，《计算机编程》（Computer Programming），2021 秋。',
+                sec_service: '学术服务',
+                sec_reviewer: '期刊审稿人',
+                rev_tmc: 'IEEE Transactions on Mobile Computing (<b>IEEE TMC</b>) 审稿人',
+                rev_tccn: 'IEEE Transactions on Cognitive Communications and Networking (<b>IEEE TCCN</b>) 审稿人',
+                rev_ton: 'IEEE/ACM Transactions on Networking (<b>IEEE/ACM TON</b>) 审稿人',
+                rev_iotj: 'IEEE Internet of Things Journal (<b>IEEE IoT-J</b>) 审稿人',
+                sec_honors: '荣誉奖项',
+                hon_tcc: 'IEEE Transactions on Cloud Computing 2024 年度最佳论文奖。<br>由 IEEE 计算机学会出版委员会（IEEE Computer Society Publications Board）颁发。',
+                hon_polyu: '香港理工大学研究生奖学金（Postgraduate Studentship）。<br>由香港理工大学颁发。',
+                hon_hit: '哈尔滨工业大学人民奖学金。<br>由哈尔滨工业大学颁发。',
+                sec_work: '实习经历',
+                work_ant: '后端开发实习生（分布式即时通讯存储研发），蚂蚁集团，中国成都，2020。',
+                sec_sponsors: '致谢与合作单位',
+                sponsors_desc: '衷心感谢以下机构与实验室对本研究工作的大力支持。',
+                sec_news: '最新动态',
+                news_2026: '[2026] 正式加入香港理工大学电子计算学系担任博士后研究员！',
+                news_2025_10: '[10/2025] 论文《Decentralized Task Offloading in Collaborative Edge Computing: A Digital Twin Assisted Multi-Agent Reinforcement Learning Approach》被 IEEE Transactions on Mobile Computing (TMC) 录用！',
+                news_2025_08: '[08/2025] 论文《Dynamic Task Offloading in Edge Computing Based on Dependency-Aware Reinforcement Learning》荣获 IEEE Transactions on Cloud Computing 2024 年度最佳论文奖！',
+                news_2024_11: '[11/2024] 论文《Mobility-aware Dependent Task Offloading in Edge Computing: A Digital Twin-assisted Reinforcement Learning Approach》被 IEEE Transactions on Mobile Computing (TMC) 录用！',
+                footer_text: '© 2026 陈祥春（Xiangchun Chen）. 最近更新：2026年11月。'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const dict = I18N[lang] || I18N.en;
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            document.querySelectorAll('[data-i18n]').forEach(function (el) {
+                const key = el.getAttribute('data-i18n');
+                if (Object.prototype.hasOwnProperty.call(dict, key)) {
+                    el.textContent = dict[key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+                const key = el.getAttribute('data-i18n-html');
+                if (Object.prototype.hasOwnProperty.call(dict, key)) {
+                    el.innerHTML = dict[key];
+                }
+            });
+            const chatInput = document.getElementById('chat-input');
+            if (chatInput && dict.chat_placeholder) {
+                chatInput.placeholder = dict.chat_placeholder;
+            }
+            const toggleBtn = document.getElementById('lang-toggle');
+            if (toggleBtn) {
+                toggleBtn.textContent = lang === 'zh' ? 'EN' : '中文';
+            }
+            try {
+                localStorage.setItem('site_lang', lang);
+            } catch (e) {
+                // ignore storage errors
+            }
         }
     </script>
     <script>
@@ -892,18 +1174,38 @@
                 li.classList.add('publication-item');
             });
 
+            const langToggle = document.getElementById('lang-toggle');
+            let currentLang = 'en';
+            try {
+                const savedLang = localStorage.getItem('site_lang');
+                if (savedLang === 'zh' || savedLang === 'en') {
+                    currentLang = savedLang;
+                }
+            } catch (e) {
+                // ignore storage errors
+            }
+            if (currentLang === 'zh') {
+                applyLanguage('zh');
+            }
+            if (langToggle) {
+                langToggle.addEventListener('click', function () {
+                    currentLang = currentLang === 'en' ? 'zh' : 'en';
+                    applyLanguage(currentLang);
+                });
+            }
+
             // Smooth scroll for navigation links (only for internal anchors)
             document.querySelectorAll('nav a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const targetId = this.getAttribute('href');
                     // Only apply smooth scroll for internal page anchors (starting with #)
-                    if (targetId.startsWith('#')) {
+                    if (targetId && targetId.startsWith('#')) {
                         e.preventDefault();
                         const targetElement = document.querySelector(targetId);
                         if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 80,
-                                behavior: 'smooth'
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
                             });
                         }
                     }

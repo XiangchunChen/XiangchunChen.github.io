@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* Modern CSS file for Xiangchun Chen's academic website */
 
 :root {
@@ -13,8 +15,6 @@
   --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 html {
   background-color: var(--light-bg);
   scroll-behavior: smooth;
@@ -26,7 +26,7 @@ body {
   background-color: var(--light-bg);
   text-align: left;
   margin: 0;
-  padding: 0;
+  padding: 90px 0 0;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -171,7 +171,7 @@ li:hover {
 }
 
 /* Publication items */
-li:has(font[style*="color:#527bbd"]) {
+li:has(.venue-badge) {
   border-left-color: #527bbd;
   background: linear-gradient(90deg, rgba(44, 90, 160, 0.05) 0%, rgba(255,255,255,0) 100%);
 }
@@ -199,14 +199,20 @@ ul > li:hover {
 }
 
 /* Publication journal tags */
-font[style*="color:#527bbd"] {
+.venue-badge {
+  display: inline-block;
   font-weight: 600;
-  color: var(--primary-color) !important;
+  color: var(--primary-color);
   background: var(--light-bg);
   padding: 0.2rem 0.8rem;
   border-radius: 20px;
   border: 1px solid var(--border-color);
   margin-right: 0.5rem;
+}
+
+.edu-role {
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 /* Email and contact info styling */
@@ -244,6 +250,11 @@ img[src*="polyu.jpg"]:hover {
 
   #layout-content h1:first-child {
     font-size: 2.2rem;
+  }
+
+  #layout-content h1:first-child::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   h2 {
@@ -398,4 +409,38 @@ a:focus {
     grid-template-columns: 1fr;
     gap: 0.65rem;
   }
+}
+
+.lang-toggle-btn {
+  background: #ffffff;
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
+  padding: 0.42rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-toggle-btn:hover {
+  border-color: var(--secondary-color);
+  background: var(--light-bg);
+}
+
+.award-badge {
+  font-weight: 700;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 0.12rem 0.5rem;
+  border-radius: 6px;
+}
+
+.site-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 0.88rem;
+  color: #64748b;
 }
